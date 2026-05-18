@@ -19,8 +19,8 @@ export default function Hero() {
         We already built a better version.
       </h1>
       <p className="hero-sub">
-        Site Prospector finds exactly why your website is losing customers — then we rebuild it for
-        you. You only pay if you want to keep it. No sales calls. No commitments.
+        We help businesses find exactly why their website is losing customers — then we rebuild it
+        for you. Our service is free to try. You only pay if you want to keep it.
       </p>
       <div className="hero-cta-row">
         <button className="btn-primary" onClick={scrollTo("cta")}>
