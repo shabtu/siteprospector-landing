@@ -1492,6 +1492,7 @@
     .btn-primary, .btn-ghost { width: 100%; justify-content: center; min-height: 48px; }
     .form-submit { min-height: 52px; }
     .case-wrap, .browser, .browser-body { overflow: hidden; max-width: 100%; }
+    .mock-before, .mock-after { max-width: 100%; overflow: hidden; }
     .hero-trust { flex-wrap: wrap; gap: 12px; justify-content: center; }
 
     /* Audit card */
