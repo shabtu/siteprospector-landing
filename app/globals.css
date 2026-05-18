@@ -92,6 +92,7 @@
     background: var(--ink);
     color: var(--bg);
     padding: 9px 16px;
+    min-height: 44px;
     font-size: 13px; font-weight: 600;
     border: none; cursor: pointer;
     transition: background 0.15s;
@@ -148,6 +149,7 @@
     background: var(--ink);
     color: var(--bg);
     padding: 14px 22px;
+    min-height: 48px;
     font-size: 15px; font-weight: 600;
     border: none; cursor: pointer;
     display: inline-flex; align-items: center; gap: 10px;
@@ -159,6 +161,7 @@
     background: transparent;
     color: var(--ink);
     padding: 14px 22px;
+    min-height: 48px;
     font-size: 15px; font-weight: 500;
     border: 1px solid var(--line-2); cursor: pointer;
     transition: all 0.15s;
