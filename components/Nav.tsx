@@ -15,7 +15,7 @@ export default function Nav() {
         <div className="nav-links">
           <a href="#how">How it works</a>
           <a href="#example">Example</a>
-          <a href="mailto:simon@siteprospector.com" className="nav-email">simon@siteprospector.com</a>
+          <a href="#pricing">Pricing</a>
           <button className="nav-cta" onClick={scrollTo("cta")}>
             Get started
           </button>
