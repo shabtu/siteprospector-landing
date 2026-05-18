@@ -17,11 +17,11 @@ export default function Nav() {
           <a href="#example">Example</a>
           <a href="mailto:simon@siteprospector.com" className="nav-email">simon@siteprospector.com</a>
           <button className="nav-cta" onClick={scrollTo("cta")}>
-            Get free audit
+            Get started
           </button>
         </div>
         <button className="nav-cta nav-cta-mobile" onClick={scrollTo("cta")}>
-          Get free audit
+          Get started
         </button>
       </div>
     </nav>

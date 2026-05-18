@@ -24,7 +24,7 @@ export default function Hero() {
       </p>
       <div className="hero-cta-row">
         <button className="btn-primary" onClick={scrollTo("cta")}>
-          See your audit →
+          Get started →
         </button>
         <button className="btn-ghost" onClick={scrollTo("example")}>
           View an example
