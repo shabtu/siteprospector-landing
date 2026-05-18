@@ -98,6 +98,9 @@
     letter-spacing: 0.01em;
   }
   .nav-cta:hover { background: var(--gold); color: #1a1208; }
+  .nav-email { color: var(--ink-2); text-decoration: none; font-size: 13px; }
+  .nav-email:hover { color: var(--ink); }
+  .nav-cta-mobile { display: none; }
 
   /* ============ HERO ============ */
   .hero {
@@ -1479,13 +1482,16 @@
     /* Nav */
     .nav-links { display: none; }
     .nav-inner { height: 56px; }
+    .nav-cta-mobile { display: block; }
 
     /* Hero */
     .hero { padding: 48px 0 40px; }
     h1.hero-title { font-size: 32px; letter-spacing: -0.025em; }
     .hero-sub { font-size: 16px; }
     .hero-cta-row { flex-direction: column; align-items: stretch; gap: 10px; }
-    .btn-primary, .btn-ghost { width: 100%; justify-content: center; }
+    .btn-primary, .btn-ghost { width: 100%; justify-content: center; min-height: 48px; }
+    .form-submit { min-height: 52px; }
+    .case-wrap, .browser, .browser-body { overflow: hidden; max-width: 100%; }
     .hero-trust { flex-wrap: wrap; gap: 12px; justify-content: center; }
 
     /* Audit card */
