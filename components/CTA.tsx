@@ -13,14 +13,22 @@ export default function CTA() {
     if (!url.trim() || !email.trim()) return;
     setState("sending");
 
-    // TODO: replace with real backend (e.g. POST to /api/audit) — see README.
-    // const res = await fetch("/api/audit", {
-    //   method: "POST",
-    //   headers: { "Content-Type": "application/json" },
-    //   body: JSON.stringify({ url, email, name }),
-    // });
-
-    setTimeout(() => setState("done"), 1400);
+    try {
+      const res = await fetch("/api/audit", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ url, email, name }),
+      });
+      if (res.ok || res.status === 202) {
+        setState("done");
+      } else {
+        setState("idle");
+        alert("Something went wrong — please try again.");
+      }
+    } catch {
+      setState("idle");
+      alert("Could not reach the audit service — please try again.");
+    }
   }
 
   function reset() {
