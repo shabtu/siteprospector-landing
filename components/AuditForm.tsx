@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useId, useState, type FormEvent } from "react";
 import Turnstile from "@/components/Turnstile";
 import {
@@ -25,6 +26,11 @@ const COPY = {
   submit: "Skicka min gratis analys",
   sending: "Skickar…",
   notes: ["Gratis och utan förpliktelse", "Ni får se resultatet först"],
+  privacy: {
+    turnstile: "Formuläret skyddas av Cloudflare Turnstile.",
+    before: "Läs hur vi hanterar era uppgifter i vår",
+    link: "integritetspolicy",
+  },
   errors: {
     url: "Webbadressen verkar inte stämma. Skriv den till exempel som minfirma.se.",
     check_unavailable:
@@ -220,6 +226,11 @@ export default function AuditForm() {
           </span>
         ))}
       </div>
+
+      <p className="form-privacy">
+        {open && `${COPY.privacy.turnstile} `}
+        {COPY.privacy.before} <Link href="/integritet">{COPY.privacy.link}</Link>.
+      </p>
     </form>
   );
 }

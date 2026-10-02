@@ -1,3 +1,13 @@
+import Link from "next/link";
+import { COMPANY, SITE } from "@/lib/site";
+
+const LEGAL_LINKS = [
+  { href: "/integritet", label: "Integritetspolicy" },
+  { href: "/villkor", label: "Villkor" },
+];
+
+const LEGAL_LINE = `${SITE.name} drivs av ${COMPANY.name} · org.nr ${COMPANY.orgNr} · ${COMPANY.address}`;
+
 export default function Footer() {
   return (
     <footer>
@@ -6,18 +16,19 @@ export default function Footer() {
           <div className="foot-l">
             <div className="logo">
               <div className="logo-mark" />
-              Site Prospector
+              {SITE.name}
             </div>
           </div>
           <div className="foot-r">
-            <a href="mailto:simon@siteprospector.com">simon@siteprospector.com</a>
-            <a href="#">Privacy</a>
-            <a href="#">Terms</a>
+            <a href={`mailto:${SITE.email}`}>{SITE.email}</a>
+            {LEGAL_LINKS.map((link) => (
+              <Link key={link.href} href={link.href}>
+                {link.label}
+              </Link>
+            ))}
           </div>
         </div>
-        <div className="foot-legal">
-          Habtu Consulting AB &middot; Org.nr 559333-3015 &middot; Prästgårdsgatan 2, 172 32 Sundbyberg &middot; © 2026
-        </div>
+        <div className="foot-legal">{LEGAL_LINE}</div>
       </div>
     </footer>
   );

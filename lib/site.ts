@@ -5,6 +5,12 @@ export const SITE = {
   email: "simon@siteprospector.com",
 } as const;
 
+export const COMPANY = {
+  name: "Habtu Consulting AB",
+  orgNr: "559333-3015",
+  address: "Prästgårdsgatan 2, 172 32 Sundbyberg",
+} as const;
+
 /** The offer. Keep in line with the contract (templates/avtal.md in the pipeline repo). */
 export const OFFER = {
   price: "695 kr",
