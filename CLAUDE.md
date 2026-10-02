@@ -1,9 +1,10 @@
 # CLAUDE.md — Development Guidelines
 
 ## Stack
-- Next.js 16 (App Router, TypeScript, Turbopack)
+- Next.js 16 (App Router, TypeScript, Turbopack), static export (`output: "export"`)
 - Tailwind CSS v4
-- Vercel (deploy target)
+- Cloudflare Pages (deploy target, see `DEPLOY.md`)
+- Swedish only: `<html lang="sv">`, all copy in Swedish
 
 ---
 
@@ -35,16 +36,29 @@ npm run lint    # must pass
 app/
   layout.tsx        # Root layout, fonts, metadata
   page.tsx          # Assembles all sections
+  not-found.tsx     # Swedish 404 (becomes out/404.html)
+  integritet/       # /integritet, from content/legal/integritetspolicy.md
+  villkor/          # /villkor, from content/legal/villkor-webbplats.md
   globals.css       # All custom CSS + responsive breakpoints
 components/
   Nav.tsx
   Hero.tsx
-  AuditShowcase.tsx
   HowItWorks.tsx
-  Example.tsx
-  Included.tsx
-  CTA.tsx
+  Example.tsx       # Fictional before/after example (no invented figures)
+  Included.tsx      # What's included + <PriceCard />
+  PriceCard.tsx
+  Faq.tsx
+  CTA.tsx           # Section around the audit form
+  AuditForm.tsx     # Free-audit form (client)
+  Turnstile.tsx     # Cloudflare Turnstile widget (client)
+  LegalPage.tsx
   Footer.tsx
+content/legal/      # Markdown for the legal pages
+lib/
+  site.ts           # Business facts and the offer (price, binding)
+  audit.ts          # Request to the audit API
+  legal.ts          # Markdown to HTML at build time
+  scroll.ts
 ```
 
 Keep components focused. If a component exceeds ~150 lines, consider splitting.
@@ -110,14 +124,17 @@ npm run build && npm run lint && npm run test
 
 ## Deploy
 
-```bash
-vercel deploy --prod --yes
-```
+The site is exported to static files in `out/` and hosted on Cloudflare Pages. How to build, which variables to set and how to upload: **`DEPLOY.md`**. Vercel is no longer the deploy target (its Hobby plan is non-commercial).
 
-The repo is linked to Vercel project `veltare/siteprospector-next`. Every push to `main` auto-deploys.
+Production URL: **https://siteprospector.com**
 
-Production URL: **https://siteprospector-next.vercel.app**
-Custom domain (pending): **siteprospector.com**
+---
+
+## Content
+
+- The price, binding time and other offer facts live in `lib/site.ts` and must match the contract. Don't state anything the offer doesn't include (no "cancel anytime", no promises about reply times or uptime).
+- No invented figures, ratings or customer quotes. The example section is fictional and says so.
+- The audit form posts to an external API and stays disabled until `NEXT_PUBLIC_TURNSTILE_SITE_KEY` is set at build time (see `DEPLOY.md`).
 
 ---
 
@@ -128,3 +145,4 @@ Custom domain (pending): **siteprospector.com**
 - Don't commit `node_modules`, `.env`, or `.vercel`
 - Don't hardcode copy — use constants or props so it's easy to update
 - Don't skip the build check before deploying
+- Don't add server features (API routes, middleware, `next/image` optimisation): the site is a static export
