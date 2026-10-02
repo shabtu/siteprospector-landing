@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Inter, JetBrains_Mono } from "next/font/google";
+import { OFFER, SITE } from "@/lib/site";
 import "./globals.css";
 
 const inter = Inter({
@@ -14,23 +15,27 @@ const jetbrains = JetBrains_Mono({
   variable: "--font-jetbrains",
 });
 
+const TITLE = `${SITE.name} – vi bygger ett gratis förslag på er hemsida`;
+const DESCRIPTION = `Vi analyserar er hemsida och bygger ett förslag med ert eget innehåll – helt gratis, utan förpliktelse. Vill ni behålla förslaget kostar det ${OFFER.priceShort}.`;
+
 export const metadata: Metadata = {
-  title: "Site Prospector — We audited your website. We already built a better one.",
-  description:
-    "Site Prospector audits your small business website, shows exactly why it's losing customers, and rebuilds it for you — free. You only pay if you keep it.",
-  metadataBase: new URL("https://siteprospector.com"),
+  metadataBase: new URL(SITE.url),
+  title: { default: TITLE, template: `%s – ${SITE.name}` },
+  description: DESCRIPTION,
+  alternates: { canonical: "/" },
   openGraph: {
-    title: "Site Prospector",
-    description: "We audited your website. We already built a better version.",
-    url: "https://siteprospector.com",
-    siteName: "Site Prospector",
+    title: TITLE,
+    description: DESCRIPTION,
+    url: "/",
+    siteName: SITE.name,
+    locale: "sv_SE",
     type: "website",
   },
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={`${inter.variable} ${jetbrains.variable}`}>
+    <html lang="sv" className={`${inter.variable} ${jetbrains.variable}`}>
       <body>{children}</body>
     </html>
   );
