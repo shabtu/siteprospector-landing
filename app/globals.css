@@ -967,7 +967,7 @@
     letter-spacing: -0.01em;
     margin-left: 6px;
   }
-  .price-note { margin-top: 12px; font-size: 13px; color: var(--ink-3); }
+  .price-note { margin-top: 12px; font-size: 13px; color: var(--ink-2); }
   .price-side {
     padding: 40px;
     display: flex; flex-direction: column; justify-content: center;
@@ -1082,7 +1082,7 @@
     margin-top: 14px;
     font-size: 12px;
     line-height: 1.5;
-    color: var(--ink-3);
+    color: var(--ink-2);
     text-align: center;
   }
   .form-privacy a { color: inherit; text-decoration: underline; }
