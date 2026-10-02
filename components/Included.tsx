@@ -1,22 +1,52 @@
+import PriceCard from "@/components/PriceCard";
+import { OFFER } from "@/lib/site";
+
+const COPY = {
+  label: "Det här ingår",
+  title: `Det här får ni för ${OFFER.price} i månaden.`,
+  sub: "Ett fast pris, ingen startavgift. Förslaget bygger vi gratis – ni betalar först när ni säger ja.",
+} as const;
+
 const INCLUDED = [
-  { num: "01", title: "Modern, responsive website", desc: "Built from scratch for your business. Mobile-first, fast, beautiful." },
-  { num: "02", title: "Hosting on premium infrastructure", desc: "Sub-second load times anywhere in the world. Zero downtime." },
-  { num: "03", title: "SSL certificate, always on", desc: "Browsers trust your site. Customer data stays encrypted. Renewed automatically." },
-  { num: "04", title: "Real human support", desc: "Email or text. Real reply within 4 business hours. No tickets, no bots." },
-  { num: "05", title: "Unlimited content updates", desc: "New hours, new menu, new staff? Send us a message. We change it for you." },
-  { num: "06", title: "Monthly performance report", desc: "Visitors, calls, form submissions, ranking. Plain English, every month." },
-];
+  {
+    num: "01",
+    title: "Modern, mobilanpassad hemsida",
+    desc: "Byggd på texter, bilder och uppgifter från er nuvarande hemsida. Fungerar lika bra i mobilen som på datorn.",
+  },
+  {
+    num: "02",
+    title: "Snabb hosting",
+    desc: "Vi sköter servern och driften, så att hemsidan laddar snabbt för era besökare.",
+  },
+  {
+    num: "03",
+    title: "SSL-certifikat",
+    desc: "Säker anslutning (https), så att webbläsaren inte varnar era besökare. Vi sköter certifikatet.",
+  },
+  {
+    num: "04",
+    title: "Ändringar och uppdateringar",
+    desc: `Nya öppettider, ny meny eller ny personal? Mejla oss. Mindre ändringar gör vi inom ${OFFER.smallChanges}. Större omarbetningar offereras separat.`,
+  },
+  {
+    num: "05",
+    title: "Support via e-post och telefon",
+    desc: "Ni når oss på e-post och telefon när något är oklart eller inte fungerar.",
+  },
+  {
+    num: "06",
+    title: "Er domän och e-post berörs inte",
+    desc: "Domännamnet är och förblir ert. Er e-post fortsätter fungera som i dag.",
+  },
+] as const;
 
 export default function Included() {
   return (
     <section className="section">
       <div className="sec-head">
-        <div className="sec-label">What&apos;s included</div>
-        <h2 className="sec-title">$149/month. Everything.</h2>
-        <p className="sec-sub">
-          One flat price. No setup fees, no contracts, no upsells. Cancel anytime — we&apos;ll
-          release your domain and content within 24 hours.
-        </p>
+        <div className="sec-label">{COPY.label}</div>
+        <h2 className="sec-title">{COPY.title}</h2>
+        <p className="sec-sub">{COPY.sub}</p>
       </div>
       <div className="included-grid">
         {INCLUDED.map((item) => (
@@ -30,6 +60,7 @@ export default function Included() {
           </div>
         ))}
       </div>
+      <PriceCard />
     </section>
   );
 }

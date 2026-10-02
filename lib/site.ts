@@ -8,8 +8,9 @@ export const SITE = {
 /** The offer. Keep in line with the contract (templates/avtal.md in the pipeline repo). */
 export const OFFER = {
   price: "695 kr",
-  priceUnit: "per månad inkl. moms",
+  priceExVat: "556 kr",
   priceShort: "695 kr/mån inkl. moms",
   binding: "12 månaders bindningstid",
   noSetupFee: "Ingen startavgift",
+  smallChanges: "två arbetsdagar",
 } as const;
