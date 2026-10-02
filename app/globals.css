@@ -1323,6 +1323,9 @@
   .foot-r a:hover { color: var(--ink); }
   .foot-copy { font-size: 13px; color: var(--ink-3); }
 
+  .not-found { padding: 96px 0; }
+  .not-found .sec-sub { margin-bottom: 32px; }
+
   /* ============ LEGAL PAGES (rendered from Markdown) ============ */
   .shell { min-height: 100vh; display: flex; flex-direction: column; }
   .shell-main { flex: 1; width: 100%; }
@@ -1423,6 +1426,7 @@
     .inc-text h4 { font-size: 15px; }
     .inc-text p { font-size: 13px; }
 
+    .not-found { padding: 48px 0; }
     /* Legal pages */
     .legal { padding-top: 40px; padding-bottom: 64px; }
     .legal-title { font-size: 28px; }
