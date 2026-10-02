@@ -4,6 +4,7 @@ import AuditShowcase from "@/components/AuditShowcase";
 import HowItWorks from "@/components/HowItWorks";
 import Example from "@/components/Example";
 import Included from "@/components/Included";
+import Faq from "@/components/Faq";
 import CTA from "@/components/CTA";
 import Footer from "@/components/Footer";
 
@@ -11,22 +12,27 @@ export default function Home() {
   return (
     <>
       <Nav />
-      <div className="page">
-        <Hero />
-      </div>
-      <div className="page">
-        <AuditShowcase />
-      </div>
-      <div id="how" className="page">
-        <HowItWorks />
-      </div>
-      <div className="page">
-        <Example />
-      </div>
-      <div id="pricing" className="page">
-        <Included />
-      </div>
-      <CTA />
+      <main>
+        <div className="page">
+          <Hero />
+        </div>
+        <div className="page">
+          <AuditShowcase />
+        </div>
+        <div id="how" className="page">
+          <HowItWorks />
+        </div>
+        <div className="page">
+          <Example />
+        </div>
+        <div id="pricing" className="page">
+          <Included />
+        </div>
+        <div className="page">
+          <Faq />
+        </div>
+        <CTA />
+      </main>
       <Footer />
     </>
   );
