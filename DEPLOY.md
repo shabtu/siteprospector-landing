@@ -20,7 +20,8 @@ npx wrangler pages dev out
 Notes:
 
 - Needs Node 20.9 or newer (developed on Node 26). On Cloudflare's own build image, set `NODE_VERSION=22`.
-- The build downloads Inter and JetBrains Mono from Google Fonts (`next/font/google`) and bundles them into `out/`, so visitors' browsers never contact Google. The build therefore needs internet access, and it can fail now and then if that download fails (it happened once during development). Run it again.
+- The build downloads Inter and JetBrains Mono from Google Fonts (`next/font/google`) and bundles them into `out/`, so visitors' browsers never contact Google. The build therefore needs internet access.
+- Intermittent failure: twice in about thirty local builds, `next build` stopped with a Turbopack error mentioning `next/font/google` ("queries have exactly one entry") and passed on the next run. Let CI retry the build once. The lasting fix is to keep the font files in the repository and load them with `next/font/local`.
 
 ## 2. Environment variables (build time)
 
