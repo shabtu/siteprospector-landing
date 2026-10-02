@@ -11,7 +11,7 @@ const CASE = {
   domain: "exempelby-tandvard.se",
   badFindings: [
     {
-      title: "Ser okej ut, men byggd 2015 och orörd sedan 2019",
+      title: "Ser okej ut, men byggd 2015 och orörd sedan 2018",
       detail:
         "Stockfoto på en leende familj högst upp, logotyp i Times New Roman och © 2018 i sidfoten. Besökarna märker att sidan inte sköts.",
     },
@@ -67,7 +67,7 @@ const CASE = {
     },
     {
       title: "Byggd för mobilen först",
-      detail: "Stora knappar, ingen sidledes scroll och snabb att ladda. Fungerar lika bra på datorn.",
+      detail: "Stora knappar, text som ryms på skärmen och snabb att ladda. Fungerar lika bra på datorn.",
     },
   ],
 } as const;
@@ -117,7 +117,7 @@ function BeforeMock() {
             <a className="mb-link">→ Klicka här för att ladda ner Nypatientblankett (PDF)</a>
           </p>
           <p>
-            <a className="mb-link">→ Klicka här för att ladda ner Tidsbeställning (PDF)</a>
+            <a className="mb-link">→ Boka tid: klicka här för att ladda ner blanketten (PDF)</a>
           </p>
         </div>
       </div>
