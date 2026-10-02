@@ -1225,6 +1225,30 @@
     text-align: center;
   }
   .url-note span { display: inline-flex; align-items: center; gap: 6px; }
+  .turnstile {
+    display: flex; justify-content: center;
+    min-height: 65px;
+    margin: 4px 0 14px;
+  }
+  .form-closed {
+    margin-bottom: 16px;
+    padding: 14px 16px;
+    border: 1px dashed var(--line-2);
+    background: #fff;
+    font-size: 15px;
+    color: var(--ink);
+    text-align: center;
+  }
+  .form-error {
+    margin: 4px 0 12px;
+    padding: 12px 14px;
+    border: 1px solid var(--line);
+    border-left: 3px solid var(--red);
+    background: #fff;
+    font-size: 14px;
+    line-height: 1.45;
+    color: var(--ink);
+  }
 
   /* Confirmation state */
   .confirm-card {
@@ -1294,24 +1318,6 @@
     font-weight: 500;
     font-family: var(--font-jetbrains), monospace;
     word-break: break-all;
-  }
-  .confirm-status {
-    margin-top: 22px;
-    padding-top: 18px;
-    border-top: 1px dashed var(--line-2);
-    font-size: 13px;
-    color: var(--ink-2);
-    display: flex; align-items: center; justify-content: center; gap: 10px;
-  }
-  .confirm-status .pulse {
-    width: 8px; height: 8px;
-    background: var(--green);
-    border-radius: 50%;
-    animation: pulseG 1.4s infinite;
-  }
-  @keyframes pulseG {
-    0%, 100% { transform: scale(1); opacity: 1; }
-    50% { transform: scale(0.6); opacity: 0.5; }
   }
   .confirm-reset {
     margin-top: 10px;
