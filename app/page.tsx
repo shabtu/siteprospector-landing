@@ -1,6 +1,5 @@
 import Nav from "@/components/Nav";
 import Hero from "@/components/Hero";
-import AuditShowcase from "@/components/AuditShowcase";
 import HowItWorks from "@/components/HowItWorks";
 import Example from "@/components/Example";
 import Included from "@/components/Included";
@@ -15,9 +14,6 @@ export default function Home() {
       <main>
         <div className="page">
           <Hero />
-        </div>
-        <div className="page">
-          <AuditShowcase />
         </div>
         <div id="how" className="page">
           <HowItWorks />
