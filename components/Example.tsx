@@ -248,7 +248,7 @@ export default function Example() {
               </div>
             </div>
             <div className="ex-findings">
-              <h4>{COPY.before.findings} · {CASE.badFindings.length} saker att förbättra</h4>
+              <h3>{COPY.before.findings} · {CASE.badFindings.length} saker att förbättra</h3>
               {CASE.badFindings.map((f) => (
                 <div key={f.title} className="finding bad">
                   <div className="finding-icon">✗</div>
@@ -276,7 +276,7 @@ export default function Example() {
               </div>
             </div>
             <div className="ex-findings">
-              <h4>{COPY.after.findings}</h4>
+              <h3>{COPY.after.findings}</h3>
               {CASE.goodFindings.map((f) => (
                 <div key={f.title} className="finding good">
                   <div className="finding-icon">✓</div>

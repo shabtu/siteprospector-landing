@@ -53,7 +53,7 @@ export default function Included() {
           <div className="inc-item" key={item.num}>
             <span className="inc-num">{item.num}</span>
             <div className="inc-text">
-              <h4>{item.title}</h4>
+              <h3>{item.title}</h3>
               <p>{item.desc}</p>
             </div>
             <span className="inc-check">✓</span>

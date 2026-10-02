@@ -832,7 +832,7 @@
     padding-top: 22px;
     border-top: 1px solid var(--line);
   }
-  .ex-findings h4 {
+  .ex-findings h3 {
     font-size: 11px; font-weight: 600;
     text-transform: uppercase;
     letter-spacing: 0.14em;
@@ -887,7 +887,7 @@
     font-size: 12px;
     color: var(--ink-3);
   }
-  .inc-text h4 {
+  .inc-text h3 {
     font-size: 17px; font-weight: 600;
     letter-spacing: -0.015em;
     margin-bottom: 4px;
@@ -1423,7 +1423,7 @@
 
     /* Included */
     .inc-item { padding: 20px 16px; grid-template-columns: auto 1fr auto; gap: 12px; }
-    .inc-text h4 { font-size: 15px; }
+    .inc-text h3 { font-size: 15px; }
     .inc-text p { font-size: 13px; }
 
     .not-found { padding: 48px 0; }
