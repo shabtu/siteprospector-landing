@@ -1,45 +1,44 @@
 "use client";
 
-export default function Hero() {
-  const scrollTo = (id: string) => () => {
-    document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
-  };
+import { goToSection } from "@/lib/scroll";
 
+const COPY = {
+  eyebrow: "För svenska småföretag",
+  sub: "Helt gratis, utan förpliktelse. Vi analyserar er nuvarande hemsida, bygger ett förslag av ert eget innehåll och visar det för er innan vi ber om något.",
+  primary: "Få en gratis analys",
+  secondary: "Se ett exempel",
+  trust: ["Gratis förslag", "Ert eget innehåll", "Ingen startavgift"],
+};
+
+export default function Hero() {
   return (
     <section className="hero">
       <div className="eyebrow">
         <span className="dot" />
-        Free audit · No signup
+        {COPY.eyebrow}
       </div>
       <h1 className="hero-title">
-        We audited your website.
+        Vi har redan byggt
         <br />
-        It scored <span className="gold">38/100</span>.
+        en <span className="gold">bättre version</span>
         <br />
-        We already built a better version.
+        av er hemsida.
       </h1>
-      <p className="hero-sub">
-        We help businesses find exactly why their website is losing customers — then we rebuild it
-        for you. Our service is free to try. You only pay if you want to keep it.
-      </p>
+      <p className="hero-sub">{COPY.sub}</p>
       <div className="hero-cta-row">
-        <button className="btn-primary" onClick={scrollTo("cta")}>
-          Get started →
+        <button className="btn-primary" onClick={() => goToSection("cta")}>
+          {COPY.primary} →
         </button>
-        <button className="btn-ghost" onClick={scrollTo("example")}>
-          View an example
+        <button className="btn-ghost" onClick={() => goToSection("example")}>
+          {COPY.secondary}
         </button>
       </div>
       <div className="hero-trust">
-        <span>
-          <span className="check">✓</span> 60-second audit
-        </span>
-        <span>
-          <span className="check">✓</span> Free rebuild
-        </span>
-        <span>
-          <span className="check">✓</span> No contract
-        </span>
+        {COPY.trust.map((item) => (
+          <span key={item}>
+            <span className="check">✓</span> {item}
+          </span>
+        ))}
       </div>
     </section>
   );

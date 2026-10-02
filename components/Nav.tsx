@@ -1,27 +1,38 @@
 "use client";
 
-export default function Nav() {
-  const scrollTo = (id: string) => () => {
-    document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
-  };
+import Link from "next/link";
+import { goToSection } from "@/lib/scroll";
+import { SITE } from "@/lib/site";
 
+const LINKS = [
+  { href: "/#how", label: "Så fungerar det" },
+  { href: "/#example", label: "Exempel" },
+  { href: "/#pricing", label: "Pris" },
+  { href: "/#faq", label: "Vanliga frågor" },
+];
+
+const CTA_LABEL = "Gratis analys";
+
+export default function Nav() {
   return (
-    <nav className="nav">
+    <nav className="nav" aria-label="Huvudmeny">
       <div className="page nav-inner">
-        <div className="logo">
+        <Link className="logo" href="/">
           <div className="logo-mark" />
-          Site Prospector
-        </div>
+          {SITE.name}
+        </Link>
         <div className="nav-links">
-          <a href="#how">How it works</a>
-          <a href="#example">Example</a>
-          <a href="#pricing">Pricing</a>
-          <button className="nav-cta" onClick={scrollTo("cta")}>
-            Get started
+          {LINKS.map((link) => (
+            <a key={link.href} href={link.href}>
+              {link.label}
+            </a>
+          ))}
+          <button className="nav-cta" onClick={() => goToSection("cta")}>
+            {CTA_LABEL}
           </button>
         </div>
-        <button className="nav-cta nav-cta-mobile" onClick={scrollTo("cta")}>
-          Get started
+        <button className="nav-cta nav-cta-mobile" onClick={() => goToSection("cta")}>
+          {CTA_LABEL}
         </button>
       </div>
     </nav>
