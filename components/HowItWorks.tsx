@@ -3,7 +3,7 @@ import { OFFER } from "@/lib/site";
 const COPY = {
   label: "Så fungerar det",
   title: "Tre steg. Ni bestämmer själva.",
-  sub: "Först analys, sedan förslag, sist ert beslut. Inget kostar något förrän ni säger ja.",
+  sub: "Först analys, sedan förslag, sist ert beslut. Ni binder er inte till något för att se förslaget.",
   steps: [
     {
       num: "STEG 01 — ANALYS",
@@ -17,8 +17,8 @@ const COPY = {
     },
     {
       num: "STEG 03 — ERT BESLUT",
-      title: "Ni bestämmer",
-      desc: `Ni får en privat länk till förslaget och kan jämföra det med er nuvarande hemsida. Vill ni behålla det kostar det ${OFFER.priceShort}. Vill ni inte gå vidare har ni inte betalat något.`,
+      title: "Ni bestämmer – inget kostar förrän ni säger ja",
+      desc: `Ni får en privat länk till förslaget och kan jämföra det med er nuvarande hemsida. Vill ni behålla det gäller ${OFFER.priceShort}. Annars är det bara att säga nej.`,
     },
   ],
 } as const;
