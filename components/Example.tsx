@@ -1,140 +1,140 @@
+/**
+ * The example is fiction: the practice, its name, address and phone number are
+ * made up, and it says so on the page. Keep it free of figures (ratings,
+ * patient counts, results) and of customer quotes.
+ */
 const CASE = {
-  name: "Riverside Family Dentistry",
-  initial: "R",
-  type: "General & cosmetic dentistry",
-  location: "Austin · TX",
-  est: "Sample audit",
-  before: 28,
-  after: 91,
-  domain: "riversidefamilydental.com",
+  name: "Exempelby Tandvård",
+  initial: "E",
+  type: "Tandläkarmottagning",
+  location: "Exempelby",
+  domain: "exempelby-tandvard.se",
   badFindings: [
     {
-      title: "Looks fine, but built in 2015 — and hasn't been touched since 2019",
+      title: "Ser okej ut, men byggd 2015 och orörd sedan 2019",
       detail:
-        "Generic stock photo of a smiling family at the top, logo in Times New Roman, copyright reads © 2018 in the footer. Patients can tell.",
+        "Stockfoto på en leende familj högst upp, logotyp i Times New Roman och © 2018 i sidfoten. Besökarna märker att sidan inte sköts.",
     },
     {
-      title: "Seven-item navigation with no hierarchy",
+      title: "Sju menyval utan ordning",
       detail:
-        "Home, About, Team, Services, Patient Forms, Insurance, Contact — with no signal about what to do first. Visitors stall.",
+        "Hem, Om oss, Vår personal, Behandlingar, Blanketter, Priser, Kontakt – inget som visar vad man ska göra först. Besökaren tvekar.",
     },
     {
-      title: "Phone number is buried in the footer — as an image",
+      title: "Telefonnumret ligger längst ner, som en bild",
       detail:
-        "Not clickable on a phone. Not selectable to copy. People give up before scrolling that far.",
+        "Det går inte att trycka på i mobilen och inte att kopiera. Det är lätt att missa.",
     },
     {
-      title: '"Book Appointment" opens a PDF form',
+      title: "”Boka tid” öppnar en PDF-blankett",
       detail:
-        "You print it, fill it in, fax it back. In 2026. No same-day booking anywhere on the site.",
+        "Man skriver ut den, fyller i och lämnar in. Det finns ingen enkel väg att kontakta mottagningen direkt från sidan.",
     },
     {
-      title: "Completely broken on mobile",
+      title: "Fungerar dåligt i mobilen",
       detail:
-        "Text overflows the screen, buttons are too small to tap, the hero photo crashes the layout. 68% of visitors come from a phone.",
+        "Texten går utanför skärmen, knapparna är för små för att trycka på och startbilden förstör layouten.",
     },
     {
-      title: "Wall of text. No trust signals.",
+      title: "Textvägg utan något som skapar förtroende",
       detail:
-        "Three paragraphs about team credentials. No reviews, no rating, no patient count, no Google Maps. 6-second load.",
+        "Tre stycken om personalens utbildning. Inga omdömen, ingen karta, inga öppettider i klartext. Sidan laddar långsamt.",
     },
   ],
   goodFindings: [
     {
-      title: "One clear headline. One clear next step.",
+      title: "En tydlig rubrik och ett tydligt nästa steg",
       detail:
-        '"Book your appointment online — same-week availability." One bold CTA above the fold. No second-guessing.',
+        "”Trygg tandvård för hela familjen.” Under rubriken finns en knapp för att boka tid eller ringa, så ingen behöver gissa vad man ska göra.",
     },
     {
-      title: "Phone number top-right, one tap to call",
-      detail:
-        "Always visible, always clickable. On mobile it dials. On desktop it shows hours. Tap-to-call up 4×.",
+      title: "Telefonnumret högst upp – ett tryck för att ringa",
+      detail: "Alltid synligt och klickbart. I mobilen ringer det direkt när man trycker på det.",
     },
     {
-      title: "Three trust signals where eyes go first",
+      title: "Förtroende där blicken hamnar först",
       detail:
-        "★ 4.9 from 312 patients · 18 years in Austin · 8,400+ patients served. All real, all visible above the fold.",
+        "Öppettider, adress och uppgifter om mottagningen och personalen – hämtade från er egen hemsida och synliga direkt.",
     },
     {
-      title: "Services as cards with icons",
+      title: "Behandlingarna som tydliga kort",
       detail:
-        "Cleanings, whitening, Invisalign, emergencies — each tappable, each linking straight to booking with that service pre-selected.",
+        "Undersökning, tandblekning, tandreglering och akut tandvård – varje kort leder till rätt information.",
     },
     {
-      title: "Embedded Google Maps + same-week booking",
-      detail:
-        "Patients see exactly where you are and book in three taps. No PDFs, no fax. Calendar synced to your practice management software.",
+      title: "Karta och öppettider på samma sida",
+      detail: "Besökaren ser var ni finns och när ni har öppet utan att behöva leta.",
     },
     {
-      title: "Mobile-first. Loads in 0.9 seconds.",
-      detail:
-        "Thumb-friendly buttons, no horizontal scroll, no overflow. Google search ranking climbs as a side effect.",
+      title: "Byggd för mobilen först",
+      detail: "Stora knappar, ingen sidledes scroll och snabb att ladda. Fungerar lika bra på datorn.",
     },
   ],
-  results: [
-    { lbl: "Online bookings", num: "×5", small: "", delta: "~6 / mo → 30+ / mo" },
-    { lbl: "Mobile load", num: "0.9", small: "s", delta: "down from 6.0s" },
-    { lbl: "Phone clicks", num: "+312", small: "%", delta: "now tap-to-call" },
-    { lbl: "Bounce rate", num: "−54", small: "%", delta: "visitors stay 3× longer" },
-  ],
+} as const;
+
+const COPY = {
+  label: "Exempel",
+  titleLines: ["En tandläkare.", "Samma mottagning, två hemsidor."],
+  sub: "Så kan ett förslag se ut. Mottagningen är påhittad. Till vänster en hemsida som ser okej ut men är svår att använda, till höger samma innehåll i en tydligare och mobilanpassad version.",
+  fiction: "Fiktivt exempel",
+  before: { tag: "Före", note: "Ser okej ut, men är svår att använda", findings: "Det här hittade vi" },
+  after: { tag: "Efter · vårt förslag", note: "Samma innehåll, tydligare upplägg", findings: "Så löser förslaget det" },
 } as const;
 
 function BeforeMock() {
   return (
     <div className="mock-before">
       <div className="mb-top">
-        <span>Welcome to Riverside Family Dentistry!</span>
-        <span>Site map | Print this page</span>
+        <span>Välkommen till Exempelby Tandvård!</span>
+        <span>Sitemap | Skriv ut sidan</span>
       </div>
       <div className="mb-head">
-        <div className="mb-logo">Riverside Family Dentistry, P.C.</div>
-        <div className="mb-tag">Serving the Austin community since 2008</div>
+        <div className="mb-logo">Exempelby Tandvård AB</div>
+        <div className="mb-tag">Din tandläkare i Exempelby sedan 2008</div>
       </div>
       <div className="mb-nav">
-        <span>Home</span><span>About</span><span>Our Team</span><span>Services</span>
-        <span>Patient Forms</span><span>Insurance</span><span>Contact</span>
+        <span>Hem</span><span>Om oss</span><span>Vår personal</span><span>Behandlingar</span>
+        <span>Blanketter</span><span>Priser</span><span>Kontakt</span>
       </div>
       <div className="mb-body">
         <div className="mb-stock">
           <div className="mb-stock-ph">
             <span className="mb-people">👨‍👩‍👧‍👦</span>
-            <span className="mb-stock-cap">[ stock photo: smiling family ]</span>
+            <span className="mb-stock-cap">[ stockfoto: leende familj ]</span>
           </div>
         </div>
         <div className="mb-text">
-          <h3>Welcome to Our Practice</h3>
+          <h3>Välkommen till vår mottagning</h3>
           <p>
-            Dr. Patricia Henderson and her team have been proudly providing comprehensive dental
-            care to families in the greater Austin area for over fifteen years. We pride ourselves
-            on offering...
+            Tandläkare Anna Exempelsson med personal har i många år erbjudit allsidig tandvård till
+            familjer i Exempelby med omnejd. Vi är stolta över att kunna erbjuda...
           </p>
           <p>
-            Our staff is committed to making your visit comfortable and pleasant. Please feel free
-            to browse our website to learn more about the services we offer, our team&apos;s
-            credentials, and...
+            Vår personal arbetar för att ditt besök ska bli bekvämt och trevligt. Läs gärna mer på
+            vår hemsida om våra behandlingar, personalens utbildning och...
           </p>
           <p>
-            <a className="mb-link">→ Click here to download our New Patient Forms (PDF)</a>
+            <a className="mb-link">→ Klicka här för att ladda ner Nypatientblankett (PDF)</a>
           </p>
           <p>
-            <a className="mb-link">→ Click here to download our Book Appointment Form (PDF)</a>
+            <a className="mb-link">→ Klicka här för att ladda ner Tidsbeställning (PDF)</a>
           </p>
         </div>
       </div>
       <div className="mb-announce">
-        <strong>What&apos;s New:</strong>
-        <span>Now Accepting New Patients! Please call to schedule your first visit.</span>
+        <strong>Nyheter:</strong>
+        <span>Vi tar emot nya patienter! Ring för att boka ditt första besök.</span>
       </div>
       <div className="mb-services-row">
-        <span><strong>Our Services:</strong></span>
-        <span>General Dentistry</span><span className="sep">|</span>
-        <span>Cleanings</span><span className="sep">|</span>
-        <span>Whitening</span><span className="sep">|</span>
-        <span>Crowns &amp; Bridges</span>
+        <span><strong>Våra behandlingar:</strong></span>
+        <span>Allmäntandvård</span><span className="sep">|</span>
+        <span>Tandstensborttagning</span><span className="sep">|</span>
+        <span>Tandblekning</span><span className="sep">|</span>
+        <span>Kronor &amp; broar</span>
       </div>
       <div className="mb-foot">
-        <span>© 2018 Riverside Family Dentistry, P.C. All rights reserved.</span>
-        <span className="mb-phone-img">[ phone img ]</span>
+        <span>© 2018 Exempelby Tandvård AB. Alla rättigheter förbehållna.</span>
+        <span className="mb-phone-img">[ telefonnummer som bild ]</span>
       </div>
     </div>
   );
@@ -144,65 +144,61 @@ function AfterMock() {
   return (
     <div className="mock-after">
       <div className="ma-topbar">
-        <span>📍 South Austin · Open today until 6pm</span>
-        <span>Most insurance accepted · <strong>New patients welcome</strong></span>
+        <span>📍 Exempelby · Öppet i dag till 17</span>
+        <span><strong>Nya patienter är välkomna</strong></span>
       </div>
       <div className="ma-nav">
         <div className="ma-logo">
-          <span className="lmark">R</span>
-          Riverside Dental
+          <span className="lmark">E</span>
+          Exempelby Tandvård
         </div>
         <div className="ma-nav-links">
-          <span>Services</span><span>New Patients</span><span>About</span><span>Visit</span>
+          <span>Behandlingar</span><span>Om oss</span><span>Hitta hit</span>
         </div>
-        <div className="ma-phone">📞 (512) 555-0142</div>
+        <div className="ma-phone">📞 08-000 00 00</div>
       </div>
       <div className="ma-hero">
         <div className="ma-hero-text">
-          <div className="ma-eyebrow">★★★★★ 4.9 · 312 Google reviews</div>
+          <div className="ma-eyebrow">Tandläkare i Exempelby</div>
           <div className="ma-h1">
-            Gentle, modern dentistry —{" "}
-            <span className="accent">booked online in 60 seconds.</span>
+            Trygg tandvård för <span className="accent">hela familjen.</span>
           </div>
           <div className="ma-sub">
-            Same-week appointments. No pressure, no upsells. We&apos;ll take care of you and your
-            family like we&apos;ve taken care of Austin since 2008.
+            Här hittar du våra behandlingar, öppettider och hur du bokar tid. Vi tar emot nya
+            patienter.
           </div>
           <div className="ma-cta-row">
-            <span className="ma-btn">Book online →</span>
-            <span className="ma-btn-ghost">Meet the team</span>
+            <span className="ma-btn">Boka tid →</span>
+            <span className="ma-btn-ghost">Möt teamet</span>
           </div>
           <div className="ma-trust">
-            <div className="ma-trust-item"><strong>18 yrs</strong><span>in Austin</span></div>
+            <div className="ma-trust-item"><strong>Öppet i dag</strong><span>till 17</span></div>
             <div className="ma-trust-sep" />
-            <div className="ma-trust-item"><strong>8,400+</strong><span>patients</span></div>
+            <div className="ma-trust-item"><strong>Ring oss</strong><span>ett tryck</span></div>
             <div className="ma-trust-sep" />
-            <div className="ma-trust-item"><strong>Same week</strong><span>availability</span></div>
+            <div className="ma-trust-item"><strong>Hitta hit</strong><span>karta</span></div>
           </div>
         </div>
         <div className="ma-portrait">
-          <div className="ma-portrait-cap">[ Dr. Henderson ]</div>
+          <div className="ma-portrait-cap">[ ert eget foto ]</div>
         </div>
       </div>
       <div className="ma-services">
-        <div className="ma-card"><div className="ma-card-icon">🦷</div><div className="ttl">Cleanings</div><div className="sub">From $89</div></div>
-        <div className="ma-card"><div className="ma-card-icon">✨</div><div className="ttl">Whitening</div><div className="sub">In-office</div></div>
-        <div className="ma-card"><div className="ma-card-icon">😊</div><div className="ttl">Invisalign</div><div className="sub">Free consult</div></div>
-        <div className="ma-card"><div className="ma-card-icon">🚑</div><div className="ttl">Emergencies</div><div className="sub">Same day</div></div>
+        <div className="ma-card"><div className="ma-card-icon">🦷</div><div className="ttl">Undersökning</div><div className="sub">Boka tid</div></div>
+        <div className="ma-card"><div className="ma-card-icon">✨</div><div className="ttl">Tandblekning</div><div className="sub">Läs mer</div></div>
+        <div className="ma-card"><div className="ma-card-icon">😊</div><div className="ttl">Tandreglering</div><div className="sub">Läs mer</div></div>
+        <div className="ma-card"><div className="ma-card-icon">🚑</div><div className="ttl">Akut tandvård</div><div className="sub">Ring oss</div></div>
       </div>
       <div className="ma-foot-row">
-        <div className="ma-review">
-          <div className="stars">★★★★★</div>
-          <div className="quote">
-            &quot;Dr. Henderson is incredibly gentle. My kids actually look forward to their visits
-            now — never thought I&apos;d say that about a dentist.&quot;
-          </div>
-          <div className="attrib">— Sarah K., patient since 2019</div>
+        <div className="ma-hours">
+          <div className="ttl">Öppettider</div>
+          <div className="txt">Måndag–fredag 08–17</div>
+          <div className="note">Lördag–söndag stängt</div>
         </div>
         <div className="ma-map">
           <div className="ma-map-grid" />
           <div className="ma-map-pin">◉</div>
-          <div className="ma-map-label">3402 S Lamar Blvd</div>
+          <div className="ma-map-label">Storgatan 1</div>
         </div>
       </div>
     </div>
@@ -213,17 +209,13 @@ export default function Example() {
   return (
     <section className="section" id="example">
       <div className="sec-head">
-        <div className="sec-label">Sample audit</div>
+        <div className="sec-label">{COPY.label}</div>
         <h2 className="sec-title">
-          A local dentist.
+          {COPY.titleLines[0]}
           <br />
-          Same clinic, two websites.
+          {COPY.titleLines[1]}
         </h2>
-        <p className="sec-sub">
-          This is the kind of audit you&apos;ll receive. The &quot;before&quot; is the kind of site
-          that looks fine at first glance — then quietly loses you a patient every week. Here&apos;s
-          exactly what we&apos;d find, fix, and ship.
-        </p>
+        <p className="sec-sub">{COPY.sub}</p>
       </div>
 
       <div className="case-wrap">
@@ -235,28 +227,16 @@ export default function Example() {
               <span>{CASE.type}</span>
               <span className="dot-sep">·</span>
               <span>{CASE.location}</span>
-              <span className="dot-sep">·</span>
-              <span>{CASE.est}</span>
             </div>
           </div>
-          <div className="case-scores">
-            <div className="cs-block bad">
-              <div className="lbl">Before</div>
-              <div className="num">{CASE.before}<span className="over">/100</span></div>
-            </div>
-            <div className="cs-arrow">→</div>
-            <div className="cs-block good">
-              <div className="lbl">After</div>
-              <div className="num">{CASE.after}<span className="over">/100</span></div>
-            </div>
-          </div>
+          <span className="pill case-flag">{COPY.fiction}</span>
         </div>
 
         <div className="case-body">
           <div className="case-side">
             <div className="case-side-head">
-              <span className="case-tag before">Before</span>
-              <span className="case-side-note">Looks fine · scores 28/100</span>
+              <span className="case-tag before">{COPY.before.tag}</span>
+              <span className="case-side-note">{COPY.before.note}</span>
             </div>
             <div className="browser">
               <div className="browser-bar">
@@ -268,9 +248,9 @@ export default function Example() {
               </div>
             </div>
             <div className="ex-findings">
-              <h4>What we found · 6 critical issues</h4>
-              {CASE.badFindings.map((f, i) => (
-                <div key={i} className="finding bad">
+              <h4>{COPY.before.findings} · {CASE.badFindings.length} saker att förbättra</h4>
+              {CASE.badFindings.map((f) => (
+                <div key={f.title} className="finding bad">
                   <div className="finding-icon">✗</div>
                   <div className="finding-text">
                     {f.title}
@@ -283,8 +263,8 @@ export default function Example() {
 
           <div className="case-side">
             <div className="case-side-head">
-              <span className="case-tag after">After · our rebuild</span>
-              <span className="case-side-note">Built in 18 hours · scores 91/100</span>
+              <span className="case-tag after">{COPY.after.tag}</span>
+              <span className="case-side-note">{COPY.after.note}</span>
             </div>
             <div className="browser">
               <div className="browser-bar">
@@ -296,9 +276,9 @@ export default function Example() {
               </div>
             </div>
             <div className="ex-findings">
-              <h4>What we&apos;d change · every issue, fixed</h4>
-              {CASE.goodFindings.map((f, i) => (
-                <div key={i} className="finding good">
+              <h4>{COPY.after.findings}</h4>
+              {CASE.goodFindings.map((f) => (
+                <div key={f.title} className="finding good">
                   <div className="finding-icon">✓</div>
                   <div className="finding-text">
                     {f.title}
@@ -307,27 +287,6 @@ export default function Example() {
                 </div>
               ))}
             </div>
-          </div>
-        </div>
-
-        <div className="case-results">
-          <div className="case-results-head">
-            <h3>What this kind of rebuild typically delivers</h3>
-            <span className="since">based on similar small-practice rebuilds</span>
-          </div>
-          <div className="results-grid">
-            {CASE.results.map((r, i) => (
-              <div className="result" key={i}>
-                <div className="lbl">{r.lbl}</div>
-                <div className="num">
-                  {r.num}
-                  {r.small && <span className="small">{r.small}</span>}
-                </div>
-                <div className="delta">
-                  <span className="up">↑</span> {r.delta}
-                </div>
-              </div>
-            ))}
           </div>
         </div>
       </div>

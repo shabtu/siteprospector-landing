@@ -484,25 +484,7 @@
   }
   .case-id .meta span { display: inline-flex; align-items: center; gap: 6px; }
   .case-id .meta .dot-sep { color: var(--ink-3); }
-  .case-scores {
-    display: flex; align-items: center; gap: 16px;
-  }
-  .case-scores .cs-block { text-align: center; }
-  .case-scores .cs-block .lbl {
-    font-size: 10px; color: var(--ink-3);
-    text-transform: uppercase; letter-spacing: 0.14em;
-    margin-bottom: 4px;
-  }
-  .case-scores .cs-block .num {
-    font-size: 36px; font-weight: 700;
-    letter-spacing: -0.03em;
-    line-height: 1;
-    font-feature-settings: 'tnum';
-  }
-  .case-scores .cs-block.bad .num { color: var(--red); }
-  .case-scores .cs-block.good .num { color: var(--green); }
-  .case-scores .cs-block .num .over { color: var(--ink-3); font-size: 16px; font-weight: 400; }
-  .case-scores .cs-arrow { color: var(--ink-3); font-size: 22px; }
+  .case-flag { justify-self: end; align-self: center; }
 
   .case-body {
     display: grid;
@@ -513,6 +495,7 @@
   .case-side {
     background: var(--bg-2);
     padding: 28px 32px 32px;
+    min-width: 0;
   }
   .case-side-head {
     display: flex; justify-content: space-between; align-items: center;
@@ -754,6 +737,7 @@
     font-size: 13px;
     color: #1F4842;
     display: flex; align-items: center; gap: 6px;
+    white-space: nowrap;
   }
   .mock-after .ma-logo .lmark {
     width: 16px; height: 16px;
@@ -914,31 +898,30 @@
     flex: 1;
     background: #FBF8F2;
   }
-  .mock-after .ma-review {
+  .mock-after .ma-hours {
     background: #fff;
     border: 1px solid #E8E0D2;
     padding: 8px 10px;
     font-size: 8px;
     color: #4A5A56;
     display: flex; flex-direction: column;
+    gap: 3px;
   }
-  .mock-after .ma-review .stars {
-    color: #C9A52E;
-    font-size: 10px;
+  .mock-after .ma-hours .ttl {
+    color: #1F4842;
+    font-size: 9px;
+    font-weight: 700;
     letter-spacing: 0.04em;
-    margin-bottom: 3px;
+    margin-bottom: 2px;
   }
-  .mock-after .ma-review .quote {
-    font-style: italic;
-    line-height: 1.35;
+  .mock-after .ma-hours .txt {
     color: #1F2D2A;
-    font-size: 8px;
-    margin-bottom: 4px;
+    font-size: 8.5px;
+    line-height: 1.35;
   }
-  .mock-after .ma-review .attrib {
-    font-size: 7px;
+  .mock-after .ma-hours .note {
+    font-size: 7.5px;
     color: #6E7A77;
-    margin-top: auto;
   }
   .mock-after .ma-map {
     background: #1F4842;
@@ -1009,90 +992,6 @@
   }
   .finding.bad .finding-icon { color: var(--red); }
   .finding.good .finding-icon { color: var(--green); }
-
-  /* Results strip */
-  .case-results {
-    border-top: 1px solid var(--line);
-    padding: 32px;
-    background: var(--bg-2);
-  }
-  .case-results-head {
-    display: flex; justify-content: space-between; align-items: baseline;
-    margin-bottom: 22px;
-    flex-wrap: wrap; gap: 12px;
-  }
-  .case-results-head h3 {
-    font-size: 18px; font-weight: 600;
-    letter-spacing: -0.015em;
-  }
-  .case-results-head .since {
-    font-size: 12px; color: var(--ink-3);
-    text-transform: uppercase;
-    letter-spacing: 0.14em;
-  }
-  .results-grid {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 1px;
-    background: var(--line);
-    border: 1px solid var(--line);
-  }
-  .result {
-    background: var(--bg-2);
-    padding: 22px 20px;
-  }
-  .result .lbl {
-    font-size: 11px; color: var(--ink-3);
-    text-transform: uppercase;
-    letter-spacing: 0.12em;
-    margin-bottom: 8px;
-  }
-  .result .num {
-    font-size: 30px;
-    font-weight: 700;
-    letter-spacing: -0.02em;
-    color: var(--green);
-    line-height: 1;
-    margin-bottom: 6px;
-    font-feature-settings: 'tnum';
-  }
-  .result .num .small { font-size: 16px; color: var(--ink-2); font-weight: 500; }
-  .result .delta { font-size: 12px; color: var(--ink-2); }
-  .result .delta .up { color: var(--green); font-weight: 500; }
-
-  /* Quote */
-  .case-quote {
-    border-top: 1px solid var(--line);
-    padding: 32px;
-    display: grid;
-    grid-template-columns: auto 1fr;
-    gap: 24px;
-    align-items: center;
-  }
-  .quote-avatar {
-    width: 56px; height: 56px;
-    background: #6b2d1a;
-    color: #f5e6c8;
-    display: grid; place-items: center;
-    font-size: 22px;
-    font-weight: 700;
-    border-radius: 50%;
-    font-family: 'Georgia', serif;
-  }
-  .quote-body p {
-    font-size: 18px;
-    color: var(--ink);
-    line-height: 1.45;
-    letter-spacing: -0.01em;
-    margin-bottom: 8px;
-    font-weight: 400;
-  }
-  .quote-body p::before { content: '“'; color: var(--gold); margin-right: 2px; }
-  .quote-body p::after { content: '”'; color: var(--gold); margin-left: 2px; }
-  .quote-attrib {
-    font-size: 13px; color: var(--ink-3);
-  }
-  .quote-attrib strong { color: var(--ink-2); font-weight: 600; }
 
   /* ============ INCLUDED ============ */
   .included-grid {
@@ -1479,7 +1378,7 @@
     .steps { grid-template-columns: 1fr; }
     .case-body { grid-template-columns: 1fr; }
     .case-header { grid-template-columns: 1fr; gap: 16px; }
-    .results-grid { grid-template-columns: 1fr 1fr; }
+    .case-flag { justify-self: start; }
     .included-grid { grid-template-columns: 1fr; }
     .nav-links a:not(.nav-cta) { display: none; }
     .browser { aspect-ratio: 16 / 10; }
@@ -1524,13 +1423,7 @@
 
     /* Example */
     .case-header { padding: 20px 16px; }
-    .case-scores { gap: 10px; }
-    .case-scores .cs-block .num { font-size: 28px; }
     .case-side { padding: 20px 16px 24px; }
-    .case-results { padding: 20px 16px; }
-    .results-grid { grid-template-columns: 1fr 1fr; }
-    .case-quote { padding: 20px 16px; flex-direction: column; }
-    .quote-body p { font-size: 15px; }
     .finding-text { font-size: 13px; }
     .finding-text .detail { font-size: 11.5px; }
 
