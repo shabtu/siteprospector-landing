@@ -37,7 +37,7 @@ const FAQ = [
   {
     q: "Vad händer efter 12 månader?",
     a: [
-      "Bindningstiden är tolv månader. Därefter förlängs avtalet automatiskt, tre månader i taget, om ni inte har sagt upp det skriftligt senast 30 dagar före periodens slut.",
+      "Bindningstiden är tolv månader. Vill ni sluta när den har gått säger ni upp avtalet per e-post senast en månad innan. Annars fortsätter det månad för månad, med en månads uppsägningstid.",
       "Om ni väljer att sluta får ni en kopia av hemsidans filer och instruktioner för att flytta den. Det fullständiga avtalet ser ni innan ni säger ja.",
     ],
   },
