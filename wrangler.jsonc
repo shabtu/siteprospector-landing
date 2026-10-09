@@ -3,6 +3,10 @@
 {
   "name": "siteprospector",
   "compatibility_date": "2026-10-06",
+  "routes": [
+    { "pattern": "siteprospector.com", "custom_domain": true },
+    { "pattern": "www.siteprospector.com", "custom_domain": true }
+  ],
   "assets": {
     "directory": "./out",
     "html_handling": "auto-trailing-slash",
