@@ -27,11 +27,11 @@ export default function Nav() {
               {link.label}
             </a>
           ))}
-          <button className="nav-cta" onClick={() => goToSection("cta")}>
+          <button className="nav-cta" onClick={() => goToSection("contact")}>
             {CTA_LABEL}
           </button>
         </div>
-        <button className="nav-cta nav-cta-mobile" onClick={() => goToSection("cta")}>
+        <button className="nav-cta nav-cta-mobile" onClick={() => goToSection("contact")}>
           {CTA_LABEL}
         </button>
       </div>

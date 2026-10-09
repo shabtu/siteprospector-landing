@@ -26,7 +26,7 @@ export default function Hero() {
       </h1>
       <p className="hero-sub">{COPY.sub}</p>
       <div className="hero-cta-row">
-        <button className="btn-primary" onClick={() => goToSection("cta")}>
+        <button className="btn-primary" onClick={() => goToSection("contact")}>
           {COPY.primary} →
         </button>
         <button className="btn-ghost" onClick={() => goToSection("example")}>

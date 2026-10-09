@@ -4,7 +4,7 @@ import HowItWorks from "@/components/HowItWorks";
 import Example from "@/components/Example";
 import Included from "@/components/Included";
 import Faq from "@/components/Faq";
-import CTA from "@/components/CTA";
+import Contact from "@/components/Contact";
 import Footer from "@/components/Footer";
 
 export default function Home() {
@@ -27,7 +27,9 @@ export default function Home() {
         <div className="page">
           <Faq />
         </div>
-        <CTA />
+        <div className="page">
+          <Contact />
+        </div>
       </main>
       <Footer />
     </>

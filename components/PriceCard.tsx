@@ -28,7 +28,7 @@ export default function PriceCard() {
             </li>
           ))}
         </ul>
-        <a className="btn-primary" href="#cta">
+        <a className="btn-primary" href="#contact">
           {COPY.cta} →
         </a>
       </div>
