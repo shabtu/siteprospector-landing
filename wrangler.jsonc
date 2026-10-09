@@ -1,0 +1,11 @@
+// The site as a Cloudflare Worker that serves the static export (`npm run build` writes out/). Cloudflare Pages is now part of
+// Workers, and new projects go this way. /integritet serves integritet.html, and unknown paths get 404.html.
+{
+  "name": "siteprospector",
+  "compatibility_date": "2026-10-06",
+  "assets": {
+    "directory": "./out",
+    "html_handling": "auto-trailing-slash",
+    "not_found_handling": "404-page"
+  }
+}
