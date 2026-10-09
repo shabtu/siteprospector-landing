@@ -26,7 +26,7 @@ npm run test
 - **Next.js 16** (App Router, `output: "export"`, React 18)
 - **TypeScript** (strict)
 - **Tailwind CSS v4** (the brand tokens live in `app/globals.css` under `@theme`)
-- **next/font** for Inter and JetBrains Mono (downloaded at build time and served from the site itself)
+- **next/font** for Inter (downloaded at build time and served from the site itself)
 - **marked** turns the legal Markdown into HTML at build time
 - **Vitest** for the tests
 
@@ -43,24 +43,16 @@ app/
 
 components/
   Nav, Hero, HowItWorks, Example, Included, PriceCard, Faq, CTA, Footer
-  AuditForm.tsx       The free-audit form
-  Turnstile.tsx       Cloudflare Turnstile widget
+  Contact.tsx         The 'mail us' section
   LegalPage.tsx       Page shell for the legal texts
 
 content/legal/        integritetspolicy.md, villkor-webbplats.md
-lib/                  site.ts (business facts and the offer), audit.ts, legal.ts, scroll.ts
+lib/                  site.ts (business facts and the offer), legal.ts
 ```
 
-## The free-audit form
+## The free-audit form (removed)
 
-There is no server, so the form posts straight from the browser to the audit API, with a Cloudflare Turnstile token:
-
-```
-POST $NEXT_PUBLIC_AUDIT_API_URL   (default https://api.siteprospector.com/api/audit)
-{ "url": "...", "email": "...", "name": "...", "turnstileToken": "..." }
-```
-
-Until the API is live, leave `NEXT_PUBLIC_TURNSTILE_SITE_KEY` unset when building: the form is then shown disabled with "Den kostnadsfria analysen öppnar inom kort." and no request is made. The form only shows success after a 2xx answer. Details in [DEPLOY.md](DEPLOY.md).
+The page has no form: the next step is an e-mail to the address in `lib/site.ts`. The form, the Turnstile widget and the audit API client were removed in commit ff89bd0 and can be restored from its parent once the audit API exists. DEPLOY.md sections 2, 3 and 5 describe that API and are not needed for the current page.
 
 ## Editing the content
 

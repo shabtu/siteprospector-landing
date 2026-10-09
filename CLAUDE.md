@@ -44,21 +44,16 @@ components/
   Nav.tsx
   Hero.tsx
   HowItWorks.tsx
-  Example.tsx       # Fictional before/after example (no invented figures)
-  Included.tsx      # What's included + <PriceCard />
-  PriceCard.tsx
+  Example.tsx       # Fictional before/after example (3 problems, 3 fixes)
+  Included.tsx      # Price card with what's included
   Faq.tsx
-  CTA.tsx           # Section around the audit form
-  AuditForm.tsx     # Free-audit form (client)
-  Turnstile.tsx     # Cloudflare Turnstile widget (client)
+  Contact.tsx       # 'Mail us' section (no form)
   LegalPage.tsx
   Footer.tsx
 content/legal/      # Markdown for the legal pages
 lib/
   site.ts           # Business facts and the offer (price, binding)
-  audit.ts          # Request to the audit API
   legal.ts          # Markdown to HTML at build time
-  scroll.ts
 ```
 
 Keep components focused. If a component exceeds ~150 lines, consider splitting.
@@ -67,22 +62,9 @@ Keep components focused. If a component exceeds ~150 lines, consider splitting.
 
 ## CSS Conventions
 
-Custom properties are defined in `globals.css` under `:root`. Use them — don't hardcode colors.
+Readability rules: body text at least 17 px on phones (18 px on desktop), nothing under 15 px except the footer, body text at least 7:1 contrast, the accent (`--accent`) only for buttons and small marks, no background pattern. Custom properties are in `:root` in `globals.css`; use them.
 
-```css
-var(--ink)      /* primary text */
-var(--ink-2)    /* secondary text */
-var(--ink-3)    /* muted text */
-var(--gold)     /* accent */
-var(--green)    /* success/positive */
-var(--red)      /* error/negative */
-var(--bg)       /* page background */
-var(--line)     /* borders */
-```
-
-**Responsive breakpoints:**
-- `960px` — tablet adjustments
-- `640px` — mobile (primary mobile target)
+Breakpoints: 640px (mobile/desktop) and 900px (nav links, two-column example).
 
 Always test at 375px (iPhone SE) and 430px (iPhone Pro Max).
 
@@ -134,7 +116,8 @@ Production URL: **https://siteprospector.com**
 
 - The price, binding time and other offer facts live in `lib/site.ts` and must match the contract. Don't state anything the offer doesn't include (no "cancel anytime", no promises about reply times or uptime).
 - No invented figures, ratings or customer quotes. The example section is fictional and says so.
-- The audit form posts to an external API and stays disabled until `NEXT_PUBLIC_TURNSTILE_SITE_KEY` is set at build time (see `DEPLOY.md`).
+- Facts come only from `docs/offer-facts.md` in the pipeline repo (what it marks Beslutat). Support is by e-mail only.
+- There is no form. The next step is mailing `SITE.email`. The audit form, Turnstile widget and API client were removed in commit ff89bd0 (restore from its parent when the audit API exists).
 
 ---
 
