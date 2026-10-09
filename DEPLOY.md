@@ -1,5 +1,7 @@
 # Deploying to Cloudflare Pages
 
+> The audit form is no longer on the page (removed in commit ff89bd0), so `NEXT_PUBLIC_TURNSTILE_SITE_KEY` and `NEXT_PUBLIC_AUDIT_API_URL` have no effect today. The form sections below are kept for when the audit API exists.
+
 The site is a static export (`output: "export"` in `next.config.js`). `npm run build` writes a plain static site to `out/`. There is no server, no API route and no middleware, so deploying means uploading that folder to Cloudflare Pages.
 
 ## 1. Build
@@ -20,7 +22,7 @@ npx wrangler pages dev out
 Notes:
 
 - Needs Node 20.9 or newer (developed on Node 26). On Cloudflare's own build image, set `NODE_VERSION=22`.
-- The build downloads Inter and JetBrains Mono from Google Fonts (`next/font/google`) and bundles them into `out/`, so visitors' browsers never contact Google. The build therefore needs internet access.
+- The build downloads Inter from Google Fonts (`next/font/google`) and bundles them into `out/`, so visitors' browsers never contact Google. The build therefore needs internet access.
 - Intermittent failure: twice in about thirty local builds, `next build` stopped with a Turbopack error mentioning `next/font/google` ("queries have exactly one entry") and passed on the next run. Let CI retry the build once. The lasting fix is to keep the font files in the repository and load them with `next/font/local`.
 
 ## 2. Environment variables (build time)

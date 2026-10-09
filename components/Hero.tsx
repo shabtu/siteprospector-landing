@@ -1,44 +1,26 @@
-"use client";
-
-import { goToSection } from "@/lib/scroll";
+import { OFFER, SITE } from "@/lib/site";
 
 const COPY = {
-  eyebrow: "För svenska småföretag",
-  sub: "Helt gratis, utan förpliktelse. Vi analyserar er nuvarande hemsida, bygger ett förslag av ert eget innehåll och visar det för er innan vi ber om något.",
-  primary: "Få en gratis analys",
-  secondary: "Se ett exempel",
-  trust: ["Gratis förslag", "Ert eget innehåll", "Ingen startavgift"],
-};
+  title: "Vi bygger ett gratis förslag på er nya hemsida.",
+  sub: "Vi utgår från er nuvarande hemsida och ert eget innehåll. Ni får en länk och tittar i lugn och ro.",
+  facts: `Förslaget är gratis. Vill ni behålla det kostar det ${OFFER.priceShort}. ${OFFER.noSetupFee}.`,
+  primary: "Se ett exempel",
+  mail: "Frågor? Mejla",
+} as const;
 
 export default function Hero() {
   return (
     <section className="hero">
-      <div className="eyebrow">
-        <span className="dot" />
-        {COPY.eyebrow}
-      </div>
-      <h1 className="hero-title">
-        Vi har redan byggt
-        <br />
-        en <span className="gold">bättre version</span>
-        <br />
-        av er hemsida.
-      </h1>
-      <p className="hero-sub">{COPY.sub}</p>
-      <div className="hero-cta-row">
-        <button className="btn-primary" onClick={() => goToSection("cta")}>
-          {COPY.primary} →
-        </button>
-        <button className="btn-ghost" onClick={() => goToSection("example")}>
-          {COPY.secondary}
-        </button>
-      </div>
-      <div className="hero-trust">
-        {COPY.trust.map((item) => (
-          <span key={item}>
-            <span className="check">✓</span> {item}
-          </span>
-        ))}
+      <h1>{COPY.title}</h1>
+      <p className="lead">{COPY.sub}</p>
+      <p className="hero-facts">{COPY.facts}</p>
+      <div className="hero-actions">
+        <a className="btn btn-primary" href="#example">
+          {COPY.primary}
+        </a>
+        <p>
+          {COPY.mail} <a href={`mailto:${SITE.email}`}>{SITE.email}</a>
+        </p>
       </div>
     </section>
   );

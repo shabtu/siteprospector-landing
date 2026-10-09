@@ -13,22 +13,14 @@ export default function Footer() {
     <footer>
       <div className="page">
         <div className="foot">
-          <div className="foot-l">
-            <div className="logo">
-              <div className="logo-mark" />
-              {SITE.name}
-            </div>
-          </div>
-          <div className="foot-r">
-            <a href={`mailto:${SITE.email}`}>{SITE.email}</a>
-            {LEGAL_LINKS.map((link) => (
-              <Link key={link.href} href={link.href}>
-                {link.label}
-              </Link>
-            ))}
-          </div>
+          <a href={`mailto:${SITE.email}`}>{SITE.email}</a>
+          {LEGAL_LINKS.map((link) => (
+            <Link key={link.href} href={link.href}>
+              {link.label}
+            </Link>
+          ))}
         </div>
-        <div className="foot-legal">{LEGAL_LINE}</div>
+        <p className="foot-legal">{LEGAL_LINE}</p>
       </div>
     </footer>
   );

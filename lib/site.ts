@@ -11,7 +11,11 @@ export const COMPANY = {
   address: "Prästgårdsgatan 2, 172 32 Sundbyberg",
 } as const;
 
-/** The offer. Keep in line with the contract (templates/avtal.md in the pipeline repo). */
+/**
+ * The offer. The source is docs/offer-facts.md in the pipeline repo; only what
+ * it marks "Beslutat" may be stated here as fixed. Keep in line with the
+ * contract (templates/avtal.md).
+ */
 export const OFFER = {
   price: "695 kr",
   priceExVat: "556 kr",
@@ -19,4 +23,10 @@ export const OFFER = {
   binding: "12 månaders bindningstid",
   noSetupFee: "Ingen startavgift",
   smallChanges: "två arbetsdagar",
+  proposalDays: "60 dagar",
 } as const;
+
+/** The mailto link used for every "mail us" button. */
+export function mailto(subject: string): string {
+  return `mailto:${SITE.email}?subject=${encodeURIComponent(subject)}`;
+}
