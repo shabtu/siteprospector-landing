@@ -1,24 +1,19 @@
-"use client";
-
 import Link from "next/link";
-import { goToSection } from "@/lib/scroll";
-import { SITE } from "@/lib/site";
+import { SITE, mailto } from "@/lib/site";
 
 const LINKS = [
   { href: "/#how", label: "Så fungerar det" },
   { href: "/#example", label: "Exempel" },
   { href: "/#pricing", label: "Pris" },
-  { href: "/#faq", label: "Vanliga frågor" },
+  { href: "/#faq", label: "Frågor" },
 ];
-
-const CTA_LABEL = "Gratis analys";
 
 export default function Nav() {
   return (
     <nav className="nav" aria-label="Huvudmeny">
       <div className="page nav-inner">
         <Link className="logo" href="/">
-          <div className="logo-mark" />
+          <span className="logo-mark" aria-hidden="true" />
           {SITE.name}
         </Link>
         <div className="nav-links">
@@ -27,13 +22,10 @@ export default function Nav() {
               {link.label}
             </a>
           ))}
-          <button className="nav-cta" onClick={() => goToSection("contact")}>
-            {CTA_LABEL}
-          </button>
         </div>
-        <button className="nav-cta nav-cta-mobile" onClick={() => goToSection("contact")}>
-          {CTA_LABEL}
-        </button>
+        <a className="btn btn-primary btn-small" href={mailto("Fråga om förslaget på hemsidan")}>
+          Mejla oss
+        </a>
       </div>
     </nav>
   );

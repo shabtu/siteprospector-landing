@@ -11,25 +11,13 @@ export default function Home() {
   return (
     <>
       <Nav />
-      <main>
-        <div className="page">
-          <Hero />
-        </div>
-        <div id="how" className="page">
-          <HowItWorks />
-        </div>
-        <div className="page">
-          <Example />
-        </div>
-        <div id="pricing" className="page">
-          <Included />
-        </div>
-        <div className="page">
-          <Faq />
-        </div>
-        <div className="page">
-          <Contact />
-        </div>
+      <main className="page">
+        <Hero />
+        <HowItWorks />
+        <Example />
+        <Included />
+        <Faq />
+        <Contact />
       </main>
       <Footer />
     </>

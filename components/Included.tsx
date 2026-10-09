@@ -1,66 +1,48 @@
-import PriceCard from "@/components/PriceCard";
-import { OFFER } from "@/lib/site";
+import { OFFER, mailto } from "@/lib/site";
 
 const COPY = {
-  label: "Det här ingår",
-  title: `Det här får ni för ${OFFER.price} i månaden.`,
-  sub: "Ett fast pris, ingen startavgift. Förslaget bygger vi gratis – ni betalar först när ni säger ja.",
+  title: "Pris",
+  vat: `inkl. moms (${OFFER.priceExVat} exkl. moms)`,
+  facts: [OFFER.noSetupFee, OFFER.binding],
+  includedTitle: "Det här ingår",
+  after:
+    "Efter 12 månader fortsätter avtalet månad för månad, med en månads uppsägningstid.",
+  button: "Fråga om förslaget",
+  subject: "Fråga om förslaget på hemsidan",
 } as const;
 
 const INCLUDED = [
-  {
-    num: "01",
-    title: "Modern, mobilanpassad hemsida",
-    desc: "Byggd på texter, bilder och uppgifter från er nuvarande hemsida. Fungerar lika bra i mobilen som på datorn.",
-  },
-  {
-    num: "02",
-    title: "Snabb hosting",
-    desc: "Vi sköter servern och driften, så att hemsidan laddar snabbt för era besökare.",
-  },
-  {
-    num: "03",
-    title: "SSL-certifikat",
-    desc: "Säker anslutning (https), så att webbläsaren inte varnar era besökare. Vi sköter certifikatet.",
-  },
-  {
-    num: "04",
-    title: "Ändringar och uppdateringar",
-    desc: `Nya öppettider, ny meny eller ny personal? Mejla oss. Mindre ändringar gör vi inom ${OFFER.smallChanges}. Större omarbetningar offereras separat.`,
-  },
-  {
-    num: "05",
-    title: "Support via e-post och telefon",
-    desc: "Ni når oss på e-post och telefon när något är oklart eller inte fungerar.",
-  },
-  {
-    num: "06",
-    title: "Er domän och e-post berörs inte",
-    desc: "Domännamnet är och förblir ert. Er e-post fortsätter fungera som i dag.",
-  },
+  "Modern hemsida som fungerar i mobilen",
+  "Hosting och SSL-certifikat (https)",
+  `Mindre ändringar inom ${OFFER.smallChanges}`,
+  "Säkerhetsuppdateringar och underhåll",
+  "Support via e-post",
+  "Hemsidan på er egen domän",
 ] as const;
 
 export default function Included() {
   return (
-    <section className="section">
-      <div className="sec-head">
-        <div className="sec-label">{COPY.label}</div>
-        <h2 className="sec-title">{COPY.title}</h2>
-        <p className="sec-sub">{COPY.sub}</p>
+    <section className="section" id="pricing" aria-labelledby="pricing-title">
+      <h2 id="pricing-title">{COPY.title}</h2>
+      <div className="price-card">
+        <p className="price-amount">{OFFER.price}</p>
+        <p className="price-vat">{COPY.vat}</p>
+        <ul className="price-facts">
+          {COPY.facts.map((fact) => (
+            <li key={fact}>{fact}</li>
+          ))}
+        </ul>
+        <h3>{COPY.includedTitle}</h3>
+        <ul className="checklist">
+          {INCLUDED.map((item) => (
+            <li key={item}>{item}</li>
+          ))}
+        </ul>
+        <a className="btn btn-primary" href={mailto(COPY.subject)}>
+          {COPY.button}
+        </a>
       </div>
-      <div className="included-grid">
-        {INCLUDED.map((item) => (
-          <div className="inc-item" key={item.num}>
-            <span className="inc-num">{item.num}</span>
-            <div className="inc-text">
-              <h3>{item.title}</h3>
-              <p>{item.desc}</p>
-            </div>
-            <span className="inc-check">✓</span>
-          </div>
-        ))}
-      </div>
-      <PriceCard />
+      <p className="after-binding">{COPY.after}</p>
     </section>
   );
 }
