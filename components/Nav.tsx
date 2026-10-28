@@ -1,7 +1,9 @@
 import Link from "next/link";
+import { TURNSTILE_SITE_KEY } from "@/lib/score";
 import { SITE, mailto } from "@/lib/site";
 
 const LINKS = [
+  ...(TURNSTILE_SITE_KEY ? [{ href: "/#granska", label: "Granska er sida" }] : []),
   { href: "/#how", label: "Så fungerar det" },
   { href: "/#example", label: "Exempel" },
   { href: "/#pricing", label: "Pris" },
