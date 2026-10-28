@@ -1,6 +1,6 @@
 # Deploying to Cloudflare Pages
 
-> The audit form is no longer on the page (removed in commit ff89bd0), so `NEXT_PUBLIC_TURNSTILE_SITE_KEY` and `NEXT_PUBLIC_AUDIT_API_URL` have no effect today. The form sections below are kept for when the audit API exists.
+> The score section ("Hur står sig er hemsida?") is on the page only when `NEXT_PUBLIC_TURNSTILE_SITE_KEY` is set at build time. Without it the page is as before: no form, nothing loaded from Cloudflare. Set it only in the order of section 3.
 
 The site is a static export (`output: "export"` in `next.config.js`). `npm run build` writes a plain static site to `out/`. There is no server, no API route and no middleware, so deploying means uploading that folder to Cloudflare Pages.
 
@@ -31,8 +31,8 @@ Both variables start with `NEXT_PUBLIC_`, so Next.js writes their values into th
 
 | Variable | Default | What it does |
 | --- | --- | --- |
-| `NEXT_PUBLIC_TURNSTILE_SITE_KEY` | not set | The Cloudflare Turnstile **site key**. While it is not set, the free-audit form is rendered disabled with the text "Den kostnadsfria analysen öppnar inom kort." and nothing is loaded from Cloudflare. |
-| `NEXT_PUBLIC_AUDIT_API_URL` | `https://api.siteprospector.com/api/audit` | Where the form posts. Only set it to use another address (for example a test API). |
+| `NEXT_PUBLIC_TURNSTILE_SITE_KEY` | not set | The Cloudflare Turnstile **site key**. While it is not set, the score section and its nav link are left out of the page and nothing is loaded from Cloudflare. |
+| `NEXT_PUBLIC_SCORE_API_URL` | `https://api.siteprospector.com` | The base address of the score API; the page calls `POST /score` and `GET /score/<token>` under it. Only set it to use another address (for example a local test API). |
 
 ```bash
 NEXT_PUBLIC_TURNSTILE_SITE_KEY=0x4AAAA... npm run build
@@ -40,13 +40,15 @@ NEXT_PUBLIC_TURNSTILE_SITE_KEY=0x4AAAA... npm run build
 
 For local builds you can put the variables in `.env.production.local` (git-ignored). In CI, set them as build variables.
 
-## 3. Go-live order: the audit API first, the Turnstile key second
+## 3. Go-live order: the API and the legal texts first, the Turnstile key last
 
-**Do not set `NEXT_PUBLIC_TURNSTILE_SITE_KEY` until the audit API is live.** With the key set, the form accepts input and tries to send it. If the API is not there, every submission ends in an error message. Without the key, the page is complete and honest about it, so it is safe to deploy the site before the API exists.
+**Do not set `NEXT_PUBLIC_TURNSTILE_SITE_KEY` until all three of these are true.** With the key set, the section accepts input and calls the API; without it, the page is complete and says nothing about a form.
 
-1. Deploy the audit API at `api.siteprospector.com/api/audit` (see section 5).
-2. In the Cloudflare dashboard, open Turnstile and add a widget for `siteprospector.com` and `www.siteprospector.com` (add the `*.pages.dev` address too if you want to test there). Put the **secret key** in the API's `TURNSTILE_SECRET` and use the **site key** here.
-3. Build with `NEXT_PUBLIC_TURNSTILE_SITE_KEY` set, and deploy again.
+1. The score API is live at `api.siteprospector.com` and switched on (`publicScoreEnabled` in the app's Settings). It is PR 1 of plan 05 in the pipeline repo; section 5 is its contract.
+2. In the Cloudflare dashboard, Turnstile has a widget for `siteprospector.com` and `www.siteprospector.com` (and the `*.pages.dev` address to test there). The **secret key** goes to the API's `TURNSTILE_SECRET`, the **site key** here.
+3. The privacy policy describes the form (section 7). Today it says the site has no form.
+
+Then build with `NEXT_PUBLIC_TURNSTILE_SITE_KEY` set and deploy again. To switch the section off, build and deploy without the key.
 
 ## 4. Deploy `out/`
 
@@ -70,52 +72,27 @@ npx wrangler pages project create siteprospector --production-branch main
 
 **Rollback.** Pages keeps earlier deployments: open the project, Deployments, and roll back to a previous one.
 
-## 5. What the audit API has to do
+## 5. What the score API has to do
 
-The browser posts straight to the API, so the API must accept requests from `https://siteprospector.com`.
+The contract is section 6 of `plans/05-public-score-endpoint.md` in the pipeline repo; `lib/score.ts` codes against it and `lib/score.test.ts` holds the cases. In short:
 
-Request:
+- `POST /score` with `{ "url": "https://minfirma.se", "turnstileToken": "…" }`. `202` with `{ token, status: "queued", queuedAhead, pollAfterMs }`, or `200` with the finished result when a recent audit was reused.
+- `GET /score/<token>` every `pollAfterMs` until `status` is `done` (the score, six categories with their maxima, up to five findings in Swedish) or `failed` (an error code and a Swedish sentence). The page gives up after 90 seconds with "Det tar längre än vanligt …" and keeps the token in the address (`#granskning=<token>`), so a reload picks the result up again.
+- Errors carry `{ "error": "<code>", "message": "<Swedish sentence>" }`, which the page shows as it is. A status without a JSON body (Cloudflare's own 429, a proxy's 502) gets the page's own sentence for that status.
+- CORS for `https://siteprospector.com` exactly, no credentials. The page sends no cookies.
+- A Turnstile token is single use: the page asks for a new one after every `POST`.
 
-```
-POST https://api.siteprospector.com/api/audit
-Content-Type: application/json
-
-{
-  "url": "https://minfirma.se",
-  "email": "anna@minfirma.se",
-  "name": "Anna Svensson",
-  "turnstileToken": "<token from the Turnstile widget>"
-}
-```
-
-- `url` is always an absolute http(s) address. The form adds `https://` when the visitor types `minfirma.se`.
-- `name` is optional and is an empty string when left blank.
-- `turnstileToken` is single use. Verify it with Cloudflare's siteverify endpoint before doing anything else.
-- CORS: answer the `OPTIONS` preflight and send `Access-Control-Allow-Origin: https://siteprospector.com` (and the `www` address if it is used), `Access-Control-Allow-Methods: POST, OPTIONS` and `Access-Control-Allow-Headers: Content-Type`.
-
-How the form reads the answer:
-
-| Answer | What the visitor sees |
-| --- | --- |
-| any 2xx | The confirmation. This is the only case where the form shows success. |
-| 400, 422 | Check the website address and e-mail. |
-| 401, 403 | The security check was not accepted. |
-| 429 | Too many requests, try again later. |
-| any other status, no answer within 15 seconds, or a network error | A general error that points to the contact e-mail. |
-
-After every failed attempt the form asks Turnstile for a new token.
+The result card offers a free proposal by e-mail (a `mailto:` link with the site's host in the subject). The ask form of the plan's `POST /request` comes with PR 2.
 
 ## 6. After a deploy
 
 - `/`, `/integritet` and `/villkor` open; an unknown address shows the Swedish 404 page.
 - The page source has `<html lang="sv">`, the Swedish title and the Open Graph tags.
-- Without the site key: the form is disabled and shows the text from section 2. With it: the Turnstile widget appears and a test submission reaches the API.
+- Without the site key: no score section and no "Granska er sida" link. With it: the Turnstile widget appears, and a test address shows a score within about ten seconds.
 
 ## 7. Legal texts
 
-`content/legal/integritetspolicy.md` and `content/legal/villkor-webbplats.md` hold a placeholder ("Utkast – texten publiceras efter juridisk granskning."). Replace each file with the reviewed text, build and deploy. A first line such as `# Integritetspolicy` becomes the page title.
-
-The privacy policy should mention that the form page loads Cloudflare Turnstile and that the form collects a website address, an e-mail address and an optional name.
+The privacy policy and the website terms are in `content/legal/` (version 1.0 of 2026-10-09). The privacy policy says today that the site has no form ("Vi har i dag inget formulär på webbplatsen"), so it must change, reviewed by the lawyer, before the site key is set; the terms should link to it from the form's context. Plan 05 section 5 lists what is new: the form itself, that the web address is audited and the result shown on the page and not mailed, what is stored and for how long, and that Cloudflare Turnstile runs in the browser. Replace the files, build and deploy together with the key.
 
 ## Not set up
 
