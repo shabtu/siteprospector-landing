@@ -32,6 +32,7 @@ Both variables start with `NEXT_PUBLIC_`, so Next.js writes their values into th
 | Variable | Default | What it does |
 | --- | --- | --- |
 | `NEXT_PUBLIC_TURNSTILE_SITE_KEY` | not set | The Cloudflare Turnstile **site key**. While it is not set, the score section and its nav link are left out of the page and nothing is loaded from Cloudflare. |
+| `NEXT_PUBLIC_SCORE_ASK` | not set | `on` puts the ask form under a score ("Be om ett gratis förslag": e-mail, optional name, Turnstile) and the fallback form for when the score is switched off. Set it only once the API has `POST /request` (PR 2 of plan 05). Without it the score card offers a proposal by e-mail. |
 | `NEXT_PUBLIC_SCORE_API_URL` | `https://api.siteprospector.com` | The base address of the score API; the page calls `POST /score` and `GET /score/<token>` under it. Only set it to use another address (for example a local test API). |
 
 ```bash
@@ -49,6 +50,8 @@ For local builds you can put the variables in `.env.production.local` (git-ignor
 3. The privacy policy describes the form (section 7). Today it says the site has no form.
 
 Then build with `NEXT_PUBLIC_TURNSTILE_SITE_KEY` set and deploy again. To switch the section off, build and deploy without the key.
+
+The ask form comes later, the same way: once PR 2 is deployed, `publicRequestsEnabled` is on, and the privacy policy also covers the e-mail address and name, build with `NEXT_PUBLIC_SCORE_ASK=on` as well.
 
 ## 4. Deploy `out/`
 
@@ -82,7 +85,12 @@ The contract is section 6 of `plans/05-public-score-endpoint.md` in the pipeline
 - CORS for `https://siteprospector.com` exactly, no credentials. The page sends no cookies.
 - A Turnstile token is single use: the page asks for a new one after every `POST`.
 
-The result card offers a free proposal by e-mail (a `mailto:` link with the site's host in the subject). The ask form of the plan's `POST /request` comes with PR 2.
+After the score, with `NEXT_PUBLIC_SCORE_ASK=on`:
+
+- `POST /request` with `{ token, email, name, turnstileToken }` under a score, or `{ url, email, name, turnstileToken }` when `POST /score` answered 503 (flow A). `200` with `{ ok: true, approved, message }`; errors as above (`400 invalid_email`, `403`, a plain `404`, `409 already_asked`, `422 cannot_ask` or `score_first`, `429`, `503`). The page shows `message` and nothing about what happens next.
+- When `approved` is true, the page polls `GET /score/<token>` every 5 seconds for up to 10 minutes and shows `proposal`: `building` with its `step`, `ready` with a button to the demo's https address, or `stopped` with one sentence. A reload shows the demo again.
+
+Without the flag the card offers a proposal by e-mail (a `mailto:` link with the site's host in the subject).
 
 ## 6. After a deploy
 
