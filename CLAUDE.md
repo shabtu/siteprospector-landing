@@ -49,7 +49,7 @@ components/
   Faq.tsx
   Contact.tsx       # 'Mail us' section
   ScoreCheck.tsx    # 'Hur står sig er hemsida?': URL field, Turnstile, polling (only with a site key)
-  ScoreResult.tsx   # The score card: total, six category bars, findings, proposal by mail
+  ScoreResult.tsx   # The score card: total, the category bars (six or seven), findings, proposal by mail
   useScorePoll.ts   # Polls GET /score/<token> until done, failed or 90 s
   Turnstile.tsx     # Cloudflare Turnstile widget, loaded only when the score section renders
   LegalPage.tsx

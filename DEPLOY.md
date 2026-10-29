@@ -77,7 +77,7 @@ npx wrangler pages project create siteprospector --production-branch main
 The contract is section 6 of `plans/05-public-score-endpoint.md` in the pipeline repo; `lib/score.ts` codes against it and `lib/score.test.ts` holds the cases. In short:
 
 - `POST /score` with `{ "url": "https://minfirma.se", "turnstileToken": "…" }`. `202` with `{ token, status: "queued", queuedAhead, pollAfterMs }`, or `200` with the finished result when a recent audit was reused.
-- `GET /score/<token>` every `pollAfterMs` until `status` is `done` (the score, six categories with their maxima, up to five findings in Swedish) or `failed` (an error code and a Swedish sentence). The page gives up after 90 seconds with "Det tar längre än vanligt …" and keeps the token in the address (`#granskning=<token>`), so a reload picks the result up again.
+- `GET /score/<token>` every `pollAfterMs` until `status` is `done` (the score, six or seven categories with their maxima, up to five findings in Swedish; the page draws whatever categories and finding keys come) or `failed` (an error code and a Swedish sentence). The page gives up after 90 seconds with "Det tar längre än vanligt …" and keeps the token in the address (`#granskning=<token>`), so a reload picks the result up again.
 - Errors carry `{ "error": "<code>", "message": "<Swedish sentence>" }`, which the page shows as it is. A status without a JSON body (Cloudflare's own 429, a proxy's 502) gets the page's own sentence for that status.
 - CORS for `https://siteprospector.com` exactly, no credentials. The page sends no cookies.
 - A Turnstile token is single use: the page asks for a new one after every `POST`.

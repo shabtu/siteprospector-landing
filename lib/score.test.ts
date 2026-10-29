@@ -73,6 +73,18 @@ describe("interpret", () => {
     expect(state.result.canAsk).toBe(true);
   });
 
+  it("keeps a seventh category and finding keys it does not know (the contract's list is open)", () => {
+    const state = interpret(200, {
+      ...DONE,
+      categories: [...DONE.categories, { id: "guidelines", label: "Riktlinjer", score: 6, max: 15 }],
+      findings: [{ key: "junk_headings", text: "Rubrikerna på startsidan säger inget om företaget." }],
+    });
+    expect(state.kind).toBe("done");
+    if (state.kind !== "done") return;
+    expect(state.result.categories.at(-1)).toEqual({ id: "guidelines", label: "Riktlinjer", score: 6, max: 15 });
+    expect(state.result.findings[0]?.key).toBe("junk_headings");
+  });
+
   it("shows the same result for every status an ask moves the request to", () => {
     for (const status of ["asked", "approved", "skipped", "refused"]) {
       expect(interpret(200, { ...DONE, status, canAsk: false }).kind).toBe("done");
