@@ -47,13 +47,22 @@ components/
   Example.tsx       # Fictional before/after example (3 problems, 3 fixes)
   Included.tsx      # Price card with what's included
   Faq.tsx
-  Contact.tsx       # 'Mail us' section (no form)
+  Contact.tsx       # 'Mail us' section
+  ScoreCheck.tsx    # 'Hur står sig er hemsida?': URL field, Turnstile, polling (only with a site key)
+  ScoreResult.tsx   # The score card: total, the category bars (six or seven), findings, proposal by mail
+  ScoreOffer.tsx    # Under the score: the demo if one is building or ready, else the ask form, else a mail link
+  AskForm.tsx       # POST /request: e-mail, optional name, Turnstile (only with NEXT_PUBLIC_SCORE_ASK=on)
+  AskFallback.tsx   # The ask with the URL alone, when the score answers 503
+  useScorePoll.ts   # Polls GET /score/<token>: the score (90 s) and the demo (5 s, 10 min)
+  Turnstile.tsx     # Cloudflare Turnstile widget, loaded only when the score section renders
   LegalPage.tsx
   Footer.tsx
 content/legal/      # Markdown for the legal pages
 lib/
   site.ts           # Business facts and the offer (price, binding)
   legal.ts          # Markdown to HTML at build time
+  score.ts          # Client for the public score API (plan 05 in the pipeline repo)
+  ask.ts            # Client for POST /request (the ask for a proposal)
 ```
 
 Keep components focused. If a component exceeds ~150 lines, consider splitting.
@@ -117,7 +126,8 @@ Production URL: **https://siteprospector.com**
 - The price, binding time and other offer facts live in `lib/site.ts` and must match the contract. Don't state anything the offer doesn't include (no "cancel anytime", no promises about reply times or uptime).
 - No invented figures, ratings or customer quotes. The example section is fictional and says so.
 - Facts come only from `docs/offer-facts.md` in the pipeline repo (what it marks Beslutat). Support is by e-mail only.
-- There is no form. The next step is mailing `SITE.email`. The audit form, Turnstile widget and API client were removed in commit ff89bd0 (restore from its parent when the audit API exists).
+- The only form is the score section, and it is built only when `NEXT_PUBLIC_TURNSTILE_SITE_KEY` is set (see `DEPLOY.md`, section 3, for the order). It shows the model-free conversion score the API returns, never the upgrade score. The response contract is section 6 of `plans/05-public-score-endpoint.md` in the pipeline repo. After a score the next step is the ask form when `NEXT_PUBLIC_SCORE_ASK=on`, else mailing `SITE.email`. The page never shows whether a request was approved by hand, skipped or refused: it shows the API's message, and a demo only when the API sends one.
+- Show the API's Swedish error sentences as they are. Don't add promises of contact or reply time to the result card.
 
 ---
 
