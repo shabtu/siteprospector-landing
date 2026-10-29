@@ -28,6 +28,12 @@ const MAX_POLL_MS = 10_000;
 export type Category = { id: string; label: string; score: number; max: number };
 export type Finding = { key: string; text: string };
 
+/** A demo built for the visitor after an approved ask (PR 2 of the plan). */
+export type Proposal =
+  | { status: "building"; step: string }
+  | { status: "ready"; url: string }
+  | { status: "stopped" };
+
 export type ScoreResult = {
   token: string;
   url: string;
@@ -37,6 +43,7 @@ export type ScoreResult = {
   findings: Finding[];
   canAsk: boolean;
   auditedAt: string;
+  proposal: Proposal | null;
 };
 
 /** What one answer of the API means for the page. */
@@ -60,6 +67,9 @@ export const MESSAGES = {
 /** The statuses whose answer is the finished result: done, and every status an ask moves it to. */
 const RESULT_STATUSES = new Set(["done", "asked", "approved", "skipped", "refused"]);
 const TOKEN_RE = /^[A-Za-z0-9_-]{24}$/;
+
+/** Exported for lib/ask.ts, which reads the same kind of answers. */
+export { isObject, str };
 
 export function isScoreToken(value: string): boolean {
   return TOKEN_RE.test(value);
@@ -113,6 +123,22 @@ function parseFinding(value: unknown): Finding | null {
   return key !== null && text !== null && text.trim() !== "" ? { key, text } : null;
 }
 
+/** The demo's public address must be an https address; anything else is not shown as a link. */
+function parseProposal(value: unknown): Proposal | null {
+  if (!isObject(value)) return null;
+  if (value.status === "building") return { status: "building", step: str(value.step) ?? "" };
+  if (value.status === "stopped") return { status: "stopped" };
+  if (value.status === "ready") {
+    const url = str(value.url);
+    try {
+      if (url && new URL(url).protocol === "https:") return { status: "ready", url };
+    } catch {
+      return null;
+    }
+  }
+  return null;
+}
+
 /** The finished result, or null when the body is not one. Unknown extra fields are ignored. */
 export function parseResult(body: unknown, fallbackToken: string): ScoreResult | null {
   if (!isObject(body) || !isNumber(body.score) || !Array.isArray(body.categories)) return null;
@@ -128,6 +154,7 @@ export function parseResult(body: unknown, fallbackToken: string): ScoreResult |
     findings: findings.filter((f): f is Finding => f !== null).slice(0, 5),
     canAsk: body.canAsk === true,
     auditedAt: str(body.auditedAt) ?? "",
+    proposal: parseProposal(body.proposal),
   };
 }
 
