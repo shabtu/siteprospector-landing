@@ -1,6 +1,6 @@
 import Link from "next/link";
 import type { ScoreResult as Result } from "@/lib/score";
-import { mailto } from "@/lib/site";
+import ScoreOffer from "@/components/ScoreOffer";
 
 const COPY = {
   outOf: "av 100",
@@ -9,14 +9,10 @@ const COPY = {
   noFindings: (checks: string) => `Granskningen hittade inget att anmärka på i de ${checks} kontrollerna.`,
   caveat: (checks: string) =>
     `Poängen bygger på ${checks} automatiska kontroller av startsidan. Den säger vad granskningen såg, inte något om ert företag.`,
-  offerTitle: "Vill ni se hur en ny hemsida kan se ut?",
-  offerText: "Vi bygger ett gratis förslag utifrån ert eget innehåll. Förslaget är helt utan förpliktelse.",
-  offerButton: "Mejla oss om ett förslag",
-  offerSubject: (host: string) => `Förslag på ny hemsida för ${host}`,
   again: "Granska en annan webbplats",
 } as const;
 
-type Props = { result: Result; onAgain: () => void };
+type Props = { result: Result; onAgain: () => void; onResult: (result: Result) => void };
 
 const NUMBER_WORDS = ["noll", "en", "två", "tre", "fyra", "fem", "sex", "sju", "åtta", "nio", "tio"];
 
@@ -25,7 +21,7 @@ function checkCount(n: number): string {
   return NUMBER_WORDS[n] ?? String(n);
 }
 
-export default function ScoreResult({ result, onAgain }: Props) {
+export default function ScoreResult({ result, onAgain, onResult }: Props) {
   const host = result.host || result.url;
   const checks = checkCount(result.categories.length);
 
@@ -66,13 +62,7 @@ export default function ScoreResult({ result, onAgain }: Props) {
       )}
       <p className="score-caveat">{COPY.caveat(checks)}</p>
 
-      <div className="score-offer">
-        <h3>{COPY.offerTitle}</h3>
-        <p>{COPY.offerText}</p>
-        <a className="btn btn-primary" href={mailto(COPY.offerSubject(host))}>
-          {COPY.offerButton}
-        </a>
-      </div>
+      <ScoreOffer result={result} onResult={onResult} />
 
       <p className="score-again">
         <button type="button" className="link-button" onClick={onAgain}>

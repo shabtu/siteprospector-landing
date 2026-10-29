@@ -203,6 +203,19 @@ a:hover { color: var(--accent-dark); }
 .link-button { font: inherit; color: var(--ink); background: none; border: 0; padding: 0; cursor: pointer; text-decoration: underline; text-underline-offset: 3px; text-decoration-thickness: 2px; text-decoration-color: var(--accent); }
 .score-again .link-button, .score-legal a { display: inline-flex; align-items: center; min-height: 44px; }
 
+.ask-form { display: grid; gap: 8px; max-width: 480px; }
+.ask-form label { font-weight: 600; margin-top: 8px; }
+.ask-form input {
+  width: 100%; min-height: 52px; padding: 12px 14px;
+  font: inherit; color: var(--ink); background: var(--bg);
+  border: 2px solid var(--ink); border-radius: 6px;
+}
+.ask-form .btn { margin-top: 8px; justify-self: start; }
+.ask-form .btn:disabled { opacity: 0.55; cursor: not-allowed; }
+@media (max-width: 639px) { .ask-form .btn { width: 100%; } }
+.ask-hint { color: var(--ink-2); }
+.ask-optional { font-weight: 400; color: var(--ink-2); }
+
 /* ============ FOOTER ============ */
 footer { border-top: 1px solid var(--line); background: var(--bg-warm); padding: 28px 0 40px; }
 .foot { display: flex; flex-wrap: wrap; gap: 4px 24px; }

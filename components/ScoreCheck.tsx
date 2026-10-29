@@ -2,9 +2,11 @@
 
 import Link from "next/link";
 import { useCallback, useEffect, useId, useState, type FormEvent } from "react";
+import AskFallback from "@/components/AskFallback";
 import ScoreResult from "@/components/ScoreResult";
 import Turnstile from "@/components/Turnstile";
 import { useScorePoll, type Waiting } from "@/components/useScorePoll";
+import { ASK_ENABLED } from "@/lib/ask";
 import {
   DEFAULT_POLL_MS,
   HASH_KEY,
@@ -48,6 +50,8 @@ export default function ScoreCheck() {
   const [waiting, setWaiting] = useState<Waiting | null>(null);
   const [result, setResult] = useState<Result | null>(null);
   const [error, setError] = useState<string | null>(null);
+  // The address the score could not take because it is switched off: the visitor may still ask (flow A).
+  const [unavailableUrl, setUnavailableUrl] = useState<string | null>(null);
 
   const settle = useCallback((state: ScoreState) => {
     setWaiting(null);
@@ -82,11 +86,13 @@ export default function ScoreCheck() {
 
     setSending(true);
     setError(null);
+    setUnavailableUrl(null);
     const state = await startScore(websiteUrl, turnstileToken);
     // A Turnstile token is single-use: ask for a fresh one whatever the answer was.
     setTurnstileToken(null);
     setResetCount((count) => count + 1);
     setSending(false);
+    if (state.kind === "failed" && state.error === "unavailable") setUnavailableUrl(websiteUrl);
     settle(state.kind === "pending" ? { ...state, pollAfterMs: state.pollAfterMs || DEFAULT_POLL_MS } : state);
   }
 
@@ -100,7 +106,7 @@ export default function ScoreCheck() {
     <section className="section" id="granska" aria-labelledby="score-title">
       <h2 id="score-title">{COPY.title}</h2>
       {result ? (
-        <ScoreResult result={result} onAgain={again} />
+        <ScoreResult result={result} onAgain={again} onResult={setResult} />
       ) : (
         <>
           <p>{COPY.text}</p>
@@ -147,6 +153,7 @@ export default function ScoreCheck() {
               </p>
             )}
           </div>
+          {ASK_ENABLED && unavailableUrl && <AskFallback url={unavailableUrl} />}
         </>
       )}
     </section>
